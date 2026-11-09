@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+:root {
+  /* Charte Graphique KFK (KUN FAYA KUN) */
+  --color-black-main: #0A0A0A;    /* Noir profond - Fond principal */
+  --color-black-card: #141414;    /* Noir carte - Composants & sections */
+  --color-black-border: #262626;  /* Bordures subtiles */
+  
+  --color-gold-main: #D4AF37;     /* Or principal - Touches VIP & Luxe */
+  --color-gold-hover: #F3E5AB;    /* Or clair - Effets au survol */
+  
+  --color-white: #FFFFFF;         /* Blanc pur - Textes principaux */
+  --color-text-muted: #A3A3A3;    /* Gris clair - Sous-titres & détails */
+  
+  --color-success: #16A34A;       /* Vert - Confirmations & en stock */
+  --color-promo: #DC2626;         /* Rouge - Offres & alertes */
+
+  /* Typographies */
+  --font-main: 'Poppins', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: var(--font-main);
+  color: var(--color-white);
+  background-color: var(--color-black-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+button {
+  font-family: var(--font-main);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Utilitaires de marque KFK */
+.text-gold {
+  color: var(--color-gold-main);
+}
+
+.bg-gold {
+  background-color: var(--color-gold-main);
+  color: var(--color-black-main);
+}
+
+.btn-primary {
+  background-color: var(--color-gold-main);
+  color: var(--color-black-main);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-gold-hover);
+  transform: translateY(-2px);
+}
+
+

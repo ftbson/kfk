@@ -1,0 +1,15 @@
+import ShopGrid from "@/components/ShopGrid";
+
+export const metadata = {
+  title: "E-Bikes | KUN FAYA KUN",
+  description:
+    "Entdecken Sie unsere E-Bikes für Stadt, Trekking und anspruchsvolle Trails.",
+};
+
+export default function BoutiquePage() {
+  return (
+    <main className="shop-page-wrapper">
+      <ShopGrid />
+    </main>
+  );
+}
