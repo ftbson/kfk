@@ -9,7 +9,7 @@ import { siteConfig } from "@/config/site";
 export const metadata = {
   title: siteConfig.brand.name,
   description:
-    "KFK (KUN FAYA KUN) — Marque lifestyle premium pour hommes. Mode, accessoires, parfums, djalabiyas et looks complets de la tête aux pieds. Modern, chic, élégant, puissant, minimaliste, international.",
+    "KFK (KUN FAYA KUN) — Marque lifestyle premium pour hommes. Mode, accessoires, parfums, JALABIYAs et looks complets de la tête aux pieds. Modern, chic, élégant, puissant, minimaliste, international.",
 };
 
 export default function HomePage() {

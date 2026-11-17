@@ -90,11 +90,11 @@ export default function manifest(): MetadataRoute.Manifest {
         icons: [{ src: "/icons/shortcut-packs.png", sizes: "192x192" }],
       },
       {
-        name: "Djalabiya House",
-        short_name: "Djalabiya",
+        name: "JALABIYA House",
+        short_name: "JALABIYA",
         description: "Tenues traditionnelles modernes",
-        url: "/categorie/djalabiya-house",
-        icons: [{ src: "/icons/shortcut-djalabiya.png", sizes: "192x192" }],
+        url: "/categorie/JALABIYA-house",
+        icons: [{ src: "/icons/shortcut-JALABIYA.png", sizes: "192x192" }],
       },
       {
         name: "Accessoires",

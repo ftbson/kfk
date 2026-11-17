@@ -22,9 +22,13 @@ export default function Navbar() {
     <header className="kfk-header">
       {/* 1. TOP ANNOUNCEMENT BAR (Noire, avec croix à gauche et texte centré) */}
       {isTopBarVisible && (
-        <div className="kfk-top-bar" role="region" aria-label="Annonce promotionnelle">
-          <button 
-            className="top-bar-close-btn" 
+        <div
+          className="kfk-top-bar"
+          role="region"
+          aria-label="Annonce promotionnelle"
+        >
+          <button
+            className="top-bar-close-btn"
             onClick={() => setIsTopBarVisible(false)}
             aria-label="Fermer l'annonce"
           >
@@ -33,7 +37,10 @@ export default function Navbar() {
 
           <div className="top-bar-center-content">
             <span>{promoBar?.text || "Vous aimez nos pièces ?"}</span>{" "}
-            <Link href={promoBar?.ctaLink || "/packs"} className="top-bar-inline-link">
+            <Link
+              href={promoBar?.ctaLink || "/packs"}
+              className="top-bar-inline-link"
+            >
               {promoBar?.ctaText || "Découvrez ici"}
             </Link>
           </div>
@@ -41,7 +48,7 @@ export default function Navbar() {
       )}
 
       {/* 2. MAIN NAVBAR */}
-      <MainNav 
+      <MainNav
         isMobileMenuOpen={isMobileMenuOpen}
         setIsMobileMenuOpen={setIsMobileMenuOpen}
         isSearchOpen={isSearchOpen}
@@ -57,17 +64,17 @@ export default function Navbar() {
   );
 }
 
-function MainNav({ 
-  isMobileMenuOpen, 
-  setIsMobileMenuOpen, 
-  isSearchOpen, 
-  setIsSearchOpen, 
-  searchQuery, 
-  setSearchQuery, 
-  favorites, 
-  totalItems, 
-  user, 
-  navigation 
+function MainNav({
+  isMobileMenuOpen,
+  setIsMobileMenuOpen,
+  isSearchOpen,
+  setIsSearchOpen,
+  searchQuery,
+  setSearchQuery,
+  favorites,
+  totalItems,
+  user,
+  navigation,
 }: any) {
   return (
     <>
@@ -96,12 +103,17 @@ function MainNav({
         </div>
 
         {/* Center Part: Categories (Desktop) */}
-        <nav className="kfk-desktop-categories" aria-label="Navigation principale">
+        <nav
+          className="kfk-desktop-categories"
+          aria-label="Navigation principale"
+        >
           {navigation.main.map((item: any) => (
             <Link
               key={item.href}
               href={item.href}
-              className={('highlight' in item && item.highlight) ? "highlight-gold" : ""}
+              className={
+                "highlight" in item && item.highlight ? "highlight-gold" : ""
+              }
             >
               {item.label}
             </Link>
@@ -118,59 +130,120 @@ function MainNav({
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
 
-          <Link href={user ? "/account" : "/login"} className="kfk-action-btn" aria-label="Mon compte">
+          <Link
+            href={user ? "/account" : "/login"}
+            className="kfk-action-btn"
+            aria-label="Mon compte"
+          >
             <i className="fa-regular fa-user"></i>
           </Link>
 
-          <Link href="/favorites" className="kfk-action-btn" aria-label="Favoris">
+          <Link
+            href="/favorites"
+            className="kfk-action-btn"
+            aria-label="Favoris"
+          >
             <i className="fa-regular fa-heart"></i>
-            {favorites?.length > 0 && <span className="badge" aria-label={`${favorites.length} favoris`}>{favorites.length}</span>}
+            {favorites?.length > 0 && (
+              <span
+                className="badge"
+                aria-label={`${favorites.length} favoris`}
+              >
+                {favorites.length}
+              </span>
+            )}
           </Link>
 
-          <Link href="/cart" className="kfk-action-btn cart-btn" aria-label="Panier d'achat">
+          <Link
+            href="/cart"
+            className="kfk-action-btn cart-btn"
+            aria-label="Panier d'achat"
+          >
             <i className="fa-solid fa-bag-shopping"></i>
-            {totalItems > 0 && <span className="badge gold-badge" aria-label={`${totalItems} articles dans le panier`}>{totalItems}</span>}
+            {totalItems > 0 && (
+              <span
+                className="badge gold-badge"
+                aria-label={`${totalItems} articles dans le panier`}
+              >
+                {totalItems}
+              </span>
+            )}
           </Link>
         </div>
       </div>
 
       {/* SEARCH OVERLAY */}
       {isSearchOpen && (
-        <div className="kfk-search-overlay" role="dialog" aria-modal="true" aria-label="Recherche">
+        <div
+          className="kfk-search-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Recherche"
+        >
           <div className="search-overlay-header">
             <div className="search-input-pill">
-              <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <i
+                className="fa-solid fa-magnifying-glass"
+                aria-hidden="true"
+              ></i>
               <input
                 type="text"
-                placeholder="Rechercher djalabiya, parfum, accessoire..."
+                placeholder="Rechercher JALABIYA, parfum, accessoire..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
                 aria-label="Rechercher des produits"
               />
               {searchQuery && (
-                <button className="clear-btn" onClick={() => setSearchQuery("")} aria-label="Effacer la recherche">
+                <button
+                  className="clear-btn"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Effacer la recherche"
+                >
                   <i className="fa-solid fa-xmark"></i>
                 </button>
               )}
             </div>
-            <button className="close-search-btn" onClick={() => setIsSearchOpen(false)} aria-label="Fermer la recherche">
+            <button
+              className="close-search-btn"
+              onClick={() => setIsSearchOpen(false)}
+              aria-label="Fermer la recherche"
+            >
               Fermer
             </button>
           </div>
           <div className="search-overlay-results">
-            <p className="search-hint">Commencez à taper pour voir les suggestions KFK...</p>
+            <p className="search-hint">
+              Commencez à taper pour voir les suggestions KFK...
+            </p>
           </div>
         </div>
       )}
 
       {/* MOBILE DRAWER MENU */}
-      <div className={`kfk-mobile-drawer ${isMobileMenuOpen ? "open" : ""}`} role="dialog" aria-modal="true" aria-label="Menu mobile">
-        <div className="drawer-backdrop" onClick={() => setIsMobileMenuOpen(false)}></div>
+      <div
+        className={`kfk-mobile-drawer ${isMobileMenuOpen ? "open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu mobile"
+      >
+        <div
+          className="drawer-backdrop"
+          onClick={() => setIsMobileMenuOpen(false)}
+        ></div>
         <div className="drawer-content">
           <div className="drawer-header">
-            <Image src="/img/logo.png" alt={siteConfig.brand.shortName} width={100} height={32} />
-            <button className="drawer-close-btn" onClick={() => setIsMobileMenuOpen(false)} aria-label="Fermer le menu">
+            <Image
+              src="/img/logo.png"
+              alt={siteConfig.brand.shortName}
+              width={100}
+              height={32}
+            />
+            <button
+              className="drawer-close-btn"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Fermer le menu"
+            >
               <i className="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -182,7 +255,9 @@ function MainNav({
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={('highlight' in item && item.highlight) ? "gold-text" : ""}
+                  className={
+                    "highlight" in item && item.highlight ? "gold-text" : ""
+                  }
                 >
                   {item.label}
                 </Link>

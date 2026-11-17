@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Départements KFK | KUN FAYA KUN",
   description:
-    "Découvrez les quatre mondes KFK : DJALABIYA HOUSE, ACCESSOIRES, LOOK & DRIP, SIGNATURE. Mode, parfums, accessoires et looks complets pour homme.",
+    "Découvrez les quatre mondes KFK : JALABIYA HOUSE, ACCESSOIRES, LOOK & DRIP, SIGNATURE. Mode, parfums, accessoires et looks complets pour homme.",
 };
 
 export default function CategoriesPage() {

@@ -27,9 +27,12 @@ export default function CategorySection() {
   }, []);
 
   return (
-    <section className="kfk-categories-section" ref={sectionRef} aria-labelledby="categories-title">
+    <section
+      className="kfk-categories-section"
+      ref={sectionRef}
+      aria-labelledby="categories-title"
+    >
       <div className="kfk-categories-container">
-        
         {/* En-tête de section centré */}
         <div className="kfk-categories-header kfk-reveal">
           <span className="kfk-categories-subtitle">
@@ -51,15 +54,15 @@ export default function CategorySection() {
               <div className="kfk-category-image-wrapper">
                 <img
                   src={
-                    dept.id === "djalabiya-house"
+                    dept.id === "JALABIYA-house"
                       ? "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop"
                       : dept.id === "accessories"
-                      ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop"
-                      : dept.id === "look-and-drip"
-                      ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
-                      : dept.id === "signature"
-                      ? "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=800&auto=format&fit=crop"
-                      : "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop"
+                        ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop"
+                        : dept.id === "look-and-drip"
+                          ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+                          : dept.id === "signature"
+                            ? "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=800&auto=format&fit=crop"
+                            : "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop"
                   }
                   alt={dept.name}
                   className="kfk-category-img"
@@ -71,7 +74,9 @@ export default function CategorySection() {
               <div className="kfk-category-content">
                 <h3 className="kfk-category-name">{dept.name}</h3>
                 <Link
-                  href={dept.id === "packs" ? "/packs" : `/categorie/${dept.id}`}
+                  href={
+                    dept.id === "packs" ? "/packs" : `/categorie/${dept.id}`
+                  }
                   className="kfk-category-pill-btn"
                 >
                   Acheter
@@ -80,7 +85,6 @@ export default function CategorySection() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

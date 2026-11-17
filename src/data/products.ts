@@ -9,7 +9,12 @@ export interface Product {
   id: string;
   title: string;
   description: string;
-  department: "djalabiya-house" | "accessories" | "look-and-drip" | "signature" | "packs";
+  department:
+    | "JALABIYA-house"
+    | "accessories"
+    | "look-and-drip"
+    | "signature"
+    | "packs";
   category: string; // Sub-category within department
   price: number;
   oldPrice?: number;
@@ -23,7 +28,7 @@ export interface Product {
   rating?: number; // Product rating out of 5
   reviewsCount?: number; // Number of reviews
   // Department-specific fields
-  fabric?: string; // For djalabiya-house
+  fabric?: string; // For JALABIYA-house
   material?: string; // For accessories
   size?: string; // For look-and-drip
   scentNotes?: string; // For signature perfumes
@@ -32,13 +37,14 @@ export interface Product {
 
 const productsInUsd: Product[] = [
   // ==========================================
-  // DJALABIYA HOUSE
+  // JALABIYA HOUSE
   // ==========================================
   {
     id: "dj-001",
     title: "Royal Boubou - Midnight",
-    description: "Hand-embroidered premium cotton boubou with gold-thread detailing. For ceremonies and celebrations.",
-    department: "djalabiya-house",
+    description:
+      "Hand-embroidered premium cotton boubou with gold-thread detailing. For ceremonies and celebrations.",
+    department: "JALABIYA-house",
     category: "Boubous",
     price: 280,
     oldPrice: 350,
@@ -52,10 +58,11 @@ const productsInUsd: Product[] = [
   },
   {
     id: "dj-002",
-    title: "Modern Djalabiya - Sand",
-    description: "Contemporary cut djalabiya in breathable linen blend. Effortless elegance for daily wear.",
-    department: "djalabiya-house",
-    category: "Djalabiyas",
+    title: "Modern JALABIYA - Sand",
+    description:
+      "Contemporary cut JALABIYA in breathable linen blend. Effortless elegance for daily wear.",
+    department: "JALABIYA-house",
+    category: "JALABIYAs",
     price: 180,
     image: "/img/products/dj-002.jpg",
     images: ["/img/products/dj-002-1.jpg"],
@@ -64,8 +71,9 @@ const productsInUsd: Product[] = [
   {
     id: "dj-003",
     title: "Ceremony Kaftan - Ivory",
-    description: "Luxurious silk-blend kaftan with subtle embossed pattern. Wedding and Eid ready.",
-    department: "djalabiya-house",
+    description:
+      "Luxurious silk-blend kaftan with subtle embossed pattern. Wedding and Eid ready.",
+    department: "JALABIYA-house",
     category: "Kaftans",
     price: 420,
     image: "/img/products/dj-003.jpg",
@@ -77,8 +85,9 @@ const productsInUsd: Product[] = [
   {
     id: "dj-004",
     title: "Heritage Boubou - Navy",
-    description: "Classic boubou silhouette in heavyweight cotton. Timeless piece for the modern traditionalist.",
-    department: "djalabiya-house",
+    description:
+      "Classic boubou silhouette in heavyweight cotton. Timeless piece for the modern traditionalist.",
+    department: "JALABIYA-house",
     category: "Boubous",
     price: 220,
     image: "/img/products/dj-004.jpg",
@@ -92,7 +101,8 @@ const productsInUsd: Product[] = [
   {
     id: "ac-001",
     title: "KFK Chronograph - Black Gold",
-    description: "Swiss movement chronograph with black DLC case, gold accents, and sapphire crystal. 100m water resistance.",
+    description:
+      "Swiss movement chronograph with black DLC case, gold accents, and sapphire crystal. 100m water resistance.",
     department: "accessories",
     category: "Watches",
     price: 850,
@@ -107,7 +117,8 @@ const productsInUsd: Product[] = [
   {
     id: "ac-002",
     title: "Aviator Sunglasses - Gold Frame",
-    description: "Classic aviator silhouette with polarized lenses and 24k gold-plated frame. Includes leather case.",
+    description:
+      "Classic aviator silhouette with polarized lenses and 24k gold-plated frame. Includes leather case.",
     department: "accessories",
     category: "Sunglasses",
     price: 280,
@@ -118,7 +129,8 @@ const productsInUsd: Product[] = [
   {
     id: "ac-003",
     title: "Signature Eau de Parfum - Oud & Amber",
-    description: "Woody oriental fragrance. Top: Bergamot, Saffron. Heart: Oud, Rose. Base: Amber, Sandalwood, Musk. 100ml.",
+    description:
+      "Woody oriental fragrance. Top: Bergamot, Saffron. Heart: Oud, Rose. Base: Amber, Sandalwood, Musk. 100ml.",
     department: "accessories",
     category: "Perfumes",
     price: 220,
@@ -134,7 +146,8 @@ const productsInUsd: Product[] = [
   {
     id: "ac-004",
     title: "Leather Satchel - Midnight",
-    description: "Full-grain Italian leather satchel with gold hardware. Fits 15\" laptop. Hand-stitched in Italy.",
+    description:
+      'Full-grain Italian leather satchel with gold hardware. Fits 15" laptop. Hand-stitched in Italy.',
     department: "accessories",
     category: "Bags",
     price: 650,
@@ -145,7 +158,8 @@ const productsInUsd: Product[] = [
   {
     id: "ac-005",
     title: "Beaded Bracelet Set - Onyx & Gold",
-    description: "Stackable 6mm natural onyx beads with 18k gold-plated spacer beads. Set of 3.",
+    description:
+      "Stackable 6mm natural onyx beads with 18k gold-plated spacer beads. Set of 3.",
     department: "accessories",
     category: "Jewelry",
     price: 95,
@@ -160,7 +174,8 @@ const productsInUsd: Product[] = [
   {
     id: "ld-001",
     title: "Executive Set - Charcoal",
-    description: "Tailored wool-blend trousers + crisp cotton shirt. Modern fit, boardroom ready.",
+    description:
+      "Tailored wool-blend trousers + crisp cotton shirt. Modern fit, boardroom ready.",
     department: "look-and-drip",
     category: "Sets",
     price: 320,
@@ -172,7 +187,8 @@ const productsInUsd: Product[] = [
   {
     id: "ld-002",
     title: "Premium Jogger - Black",
-    description: "Heavyweight French terry jogger with tapered fit. Embroidered KFK logo. Everyday luxury.",
+    description:
+      "Heavyweight French terry jogger with tapered fit. Embroidered KFK logo. Everyday luxury.",
     department: "look-and-drip",
     category: "Joggers",
     price: 140,
@@ -183,7 +199,8 @@ const productsInUsd: Product[] = [
   {
     id: "ld-003",
     title: "Oxford Shirt - White",
-    description: "Premium cotton oxford with mother-of-pearl buttons. Versatile staple for any look.",
+    description:
+      "Premium cotton oxford with mother-of-pearl buttons. Versatile staple for any look.",
     department: "look-and-drip",
     category: "Shirts",
     price: 110,
@@ -194,7 +211,8 @@ const productsInUsd: Product[] = [
   {
     id: "ld-004",
     title: "Leather Sneakers - Minimal",
-    description: "Full-grain leather low-top sneakers. Margom sole. Clean, timeless, all-day comfort.",
+    description:
+      "Full-grain leather low-top sneakers. Margom sole. Clean, timeless, all-day comfort.",
     department: "look-and-drip",
     category: "Sneakers",
     price: 280,
@@ -206,7 +224,8 @@ const productsInUsd: Product[] = [
   {
     id: "ld-005",
     title: "Polo Piqué - Navy",
-    description: "Long-staple cotton piqué polo. Slim fit, reinforced collar. Elevated casual.",
+    description:
+      "Long-staple cotton piqué polo. Slim fit, reinforced collar. Elevated casual.",
     department: "look-and-drip",
     category: "Polos",
     price: 95,
@@ -221,7 +240,8 @@ const productsInUsd: Product[] = [
   {
     id: "sg-001",
     title: "KFK No. 1 - Signature Parfum",
-    description: "The flagship fragrance. Top: Citrus, Cardamom. Heart: Iris, Violet. Base: Vetiver, Tonka, Musk. 100ml. Numbered bottle.",
+    description:
+      "The flagship fragrance. Top: Citrus, Cardamom. Heart: Iris, Violet. Base: Vetiver, Tonka, Musk. 100ml. Numbered bottle.",
     department: "signature",
     category: "Signature Perfumes",
     price: 380,
@@ -236,7 +256,8 @@ const productsInUsd: Product[] = [
   {
     id: "sg-002",
     title: "KFK No. 2 - Night Edition",
-    description: "Darker, deeper interpretation. Top: Black Pepper, Bergamot. Heart: Leather, Tobacco. Base: Oud, Patchouli, Vanilla. 100ml.",
+    description:
+      "Darker, deeper interpretation. Top: Black Pepper, Bergamot. Heart: Leather, Tobacco. Base: Oud, Patchouli, Vanilla. 100ml.",
     department: "signature",
     category: "Signature Perfumes",
     price: 420,
@@ -245,12 +266,14 @@ const productsInUsd: Product[] = [
     badge: "Limited Edition",
     isLimitedEdition: true,
     limitedEditionNumber: 50,
-    scentNotes: "Black Pepper, Bergamot, Leather, Tobacco, Oud, Patchouli, Vanilla",
+    scentNotes:
+      "Black Pepper, Bergamot, Leather, Tobacco, Oud, Patchouli, Vanilla",
   },
   {
     id: "sg-003",
     title: "Signature Gift Box",
-    description: "Curated luxury gift set: Signature Perfume (50ml), engraved card holder, silk pocket square. Premium packaging.",
+    description:
+      "Curated luxury gift set: Signature Perfume (50ml), engraved card holder, silk pocket square. Premium packaging.",
     department: "signature",
     category: "Gift Boxes",
     price: 520,
@@ -261,7 +284,8 @@ const productsInUsd: Product[] = [
   {
     id: "sg-004",
     title: "Personalized Cufflinks - Gold",
-    description: "18k gold-plated sterling silver cufflinks. Custom engraving available (initials, date). Gift box included.",
+    description:
+      "18k gold-plated sterling silver cufflinks. Custom engraving available (initials, date). Gift box included.",
     department: "signature",
     category: "Personalized",
     price: 350,
@@ -277,7 +301,8 @@ const productsInUsd: Product[] = [
   {
     id: "pk-001",
     title: "Gentleman Pack",
-    description: "Trousers + Shirt + Watch + Perfume. The complete ensemble for elegance & success.",
+    description:
+      "Trousers + Shirt + Watch + Perfume. The complete ensemble for elegance & success.",
     department: "packs",
     category: "Curated Packs",
     price: 1100,
@@ -286,14 +311,20 @@ const productsInUsd: Product[] = [
     image: "/img/products/pk-001.jpg",
     images: ["/img/products/pk-001-1.jpg", "/img/products/pk-001-2.jpg"],
     badge: "Best Value",
-    packItems: ["Executive Trousers (Charcoal)", "Oxford Shirt (White)", "KFK Chronograph (Black Gold)", "Signature Eau de Parfum (100ml)"],
+    packItems: [
+      "Executive Trousers (Charcoal)",
+      "Oxford Shirt (White)",
+      "KFK Chronograph (Black Gold)",
+      "Signature Eau de Parfum (100ml)",
+    ],
     rating: 4.9,
     reviewsCount: 89,
   },
   {
     id: "pk-002",
     title: "Friday Pack",
-    description: "Djalabiya + Perfume + Watch. Spirituality & prestige for the holy day and beyond.",
+    description:
+      "JALABIYA + Perfume + Watch. Spirituality & prestige for the holy day and beyond.",
     department: "packs",
     category: "Curated Packs",
     price: 980,
@@ -302,14 +333,19 @@ const productsInUsd: Product[] = [
     image: "/img/products/pk-002.jpg",
     images: ["/img/products/pk-002-1.jpg"],
     badge: "Tradition Meets Luxury",
-    packItems: ["Modern Djalabiya (Sand)", "Signature Eau de Parfum (100ml)", "KFK Chronograph (Black Gold)"],
+    packItems: [
+      "Modern JALABIYA (Sand)",
+      "Signature Eau de Parfum (100ml)",
+      "KFK Chronograph (Black Gold)",
+    ],
     rating: 4.8,
     reviewsCount: 67,
   },
   {
     id: "pk-003",
     title: "Drip Pack",
-    description: "Jogger + Sneakers + Sunglasses + Bracelet. Comfort & style for everyday dominance.",
+    description:
+      "Jogger + Sneakers + Sunglasses + Bracelet. Comfort & style for everyday dominance.",
     department: "packs",
     category: "Curated Packs",
     price: 720,
@@ -318,14 +354,20 @@ const productsInUsd: Product[] = [
     image: "/img/products/pk-003.jpg",
     images: ["/img/products/pk-003-1.jpg", "/img/products/pk-003-2.jpg"],
     badge: "Street Ready",
-    packItems: ["Premium Jogger (Black)", "Leather Sneakers (Minimal)", "Aviator Sunglasses (Gold)", "Beaded Bracelet Set (Onyx & Gold)"],
+    packItems: [
+      "Premium Jogger (Black)",
+      "Leather Sneakers (Minimal)",
+      "Aviator Sunglasses (Gold)",
+      "Beaded Bracelet Set (Onyx & Gold)",
+    ],
     rating: 4.7,
     reviewsCount: 54,
   },
   {
     id: "pk-004",
     title: "Executive Pack",
-    description: "Suit + Watch + Satchel. Class & ambition for the leader who commands every room.",
+    description:
+      "Suit + Watch + Satchel. Class & ambition for the leader who commands every room.",
     department: "packs",
     category: "Curated Packs",
     price: 1850,
@@ -334,7 +376,11 @@ const productsInUsd: Product[] = [
     image: "/img/products/pk-004.jpg",
     images: ["/img/products/pk-004-1.jpg", "/img/products/pk-004-2.jpg"],
     badge: "Power Dressing",
-    packItems: ["Tailored Wool Suit (Charcoal)", "KFK Chronograph (Black Gold)", "Leather Satchel (Midnight)"],
+    packItems: [
+      "Tailored Wool Suit (Charcoal)",
+      "KFK Chronograph (Black Gold)",
+      "Leather Satchel (Midnight)",
+    ],
     rating: 4.9,
     reviewsCount: 41,
   },
@@ -350,7 +396,9 @@ export const productsData: Product[] = productsInUsd.map((product) => ({
 }));
 
 // Helper functions
-export function getProductsByDepartment(department: Product["department"]): Product[] {
+export function getProductsByDepartment(
+  department: Product["department"],
+): Product[] {
   return productsData.filter((p) => p.department === department);
 }
 
@@ -373,7 +421,10 @@ export function getVipExclusiveProducts(): Product[] {
 export function getFeaturedProducts(limit = 8): Product[] {
   // Return a mix of best sellers, new, and limited editions
   return productsData
-    .filter((p) => p.badge === "Best Seller" || p.badge === "New" || p.isLimitedEdition)
+    .filter(
+      (p) =>
+        p.badge === "Best Seller" || p.badge === "New" || p.isLimitedEdition,
+    )
     .slice(0, limit);
 }
 

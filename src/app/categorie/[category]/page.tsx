@@ -5,7 +5,7 @@ import { productsData } from "@/data/products";
 import { siteConfig } from "@/config/site";
 
 const departments = {
-  "djalabiya-house": { label: "DJALABIYA HOUSE" },
+  "JALABIYA-house": { label: "JALABIYA HOUSE" },
   accessories: { label: "ACCESSOIRES" },
   "look-and-drip": { label: "LOOK & DRIP" },
   signature: { label: "SIGNATURE" },
@@ -42,7 +42,8 @@ export default async function CategoryPage({
         <p className="storefront-eyebrow">CINQ MONDES. UNE DESTINÉE.</p>
         <h1>{selectedDept.label}</h1>
         <p>
-          {deptConfig?.description ?? `${products.length} articles dans ce département`}
+          {deptConfig?.description ??
+            `${products.length} articles dans ce département`}
         </p>
       </header>
       <div className="storefront-product-grid">
@@ -51,7 +52,9 @@ export default async function CategoryPage({
         ))}
       </div>
       {products.length === 0 && (
-        <p className="catalog-empty">Aucun article disponible pour le moment.</p>
+        <p className="catalog-empty">
+          Aucun article disponible pour le moment.
+        </p>
       )}
       <div className="storefront-actions">
         <Link href="/categorie" className="storefront-secondary-link">

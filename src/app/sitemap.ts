@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/packs",
-    "/categorie/djalabiya-house",
+    "/categorie/JALABIYA-house",
     "/categorie/accessories",
     "/categorie/look-and-drip",
     "/categorie/signature",

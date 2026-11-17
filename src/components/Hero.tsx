@@ -17,30 +17,41 @@ interface Slide {
 }
 
 // Hero slides driven by siteConfig departments (first 4 departments)
-const heroSlides: Slide[] = siteConfig.departments.slice(0, 4).map((dept, idx) => ({
-  id: idx + 1,
-  title: dept.hero.title,
-  subtitle: dept.hero.subtitle,
-  category: dept.hero.category,
-  // TODO: Replace with actual KFK assets in /public/img/hero/
-  imageLeft: dept.id === "djalabiya-house"
-    ? "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop"
-    : dept.id === "accessories"
-    ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop"
-    : dept.id === "look-and-drip"
-    ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop"
-    : "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=1000&auto=format&fit=crop",
-  imageRight: dept.id === "djalabiya-house"
-    ? "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format&fit=crop"
-    : dept.id === "accessories"
-    ? "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=1000&auto=format&fit=crop"
-    : dept.id === "look-and-drip"
-    ? "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop"
-    : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop",
-  ctaText: dept.hero.ctaText,
-  ctaLink: dept.hero.ctaLink,
-  bgColor: idx === 0 ? "#0f0f0f" : idx === 1 ? "#141414" : idx === 2 ? "#0d0d0d" : "#111111",
-}));
+const heroSlides: Slide[] = siteConfig.departments
+  .slice(0, 4)
+  .map((dept, idx) => ({
+    id: idx + 1,
+    title: dept.hero.title,
+    subtitle: dept.hero.subtitle,
+    category: dept.hero.category,
+    // TODO: Replace with actual KFK assets in /public/img/hero/
+    imageLeft:
+      dept.id === "JALABIYA-house"
+        ? "/img/jalabiya.jpg"
+        : dept.id === "accessories"
+          ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop"
+          : dept.id === "look-and-drip"
+            ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop"
+            : "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=1000&auto=format&fit=crop",
+    imageRight:
+      dept.id === "JALABIYA-house"
+        ? "/img/jalabiya2.jpg"
+        : dept.id === "accessories"
+          ? "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=1000&auto=format&fit=crop"
+          : dept.id === "look-and-drip"
+            ? "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop"
+            : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop",
+    ctaText: dept.hero.ctaText,
+    ctaLink: dept.hero.ctaLink,
+    bgColor:
+      idx === 0
+        ? "#0f0f0f"
+        : idx === 1
+          ? "#141414"
+          : idx === 2
+            ? "#0d0d0d"
+            : "#111111",
+  }));
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -75,7 +86,6 @@ export default function Hero() {
     >
       {/* Main Split-Screen Container */}
       <div className="hero-split-container">
-
         {/* Left Side of Split */}
         <div className="hero-side hero-side-left">
           <div
@@ -124,13 +134,21 @@ export default function Hero() {
         <div className="hero-indicators-bar">
           <button
             className="hero-nav-arrow"
-            onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+            onClick={() =>
+              setCurrentSlide(
+                (prev) => (prev - 1 + heroSlides.length) % heroSlides.length,
+              )
+            }
             aria-label="Diapositive précédente"
           >
             <i className="fa-solid fa-chevron-left" aria-hidden="true"></i>
           </button>
 
-          <div className="hero-dots" role="tablist" aria-label="Indicateurs de diapositives">
+          <div
+            className="hero-dots"
+            role="tablist"
+            aria-label="Indicateurs de diapositives"
+          >
             {heroSlides.map((s, idx) => (
               <button
                 key={s.id}
@@ -145,13 +163,14 @@ export default function Hero() {
 
           <button
             className="hero-nav-arrow"
-            onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+            onClick={() =>
+              setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+            }
             aria-label="Diapositive suivante"
           >
             <i className="fa-solid fa-chevron-right" aria-hidden="true"></i>
           </button>
         </div>
-
       </div>
     </section>
   );

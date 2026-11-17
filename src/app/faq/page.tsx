@@ -11,32 +11,29 @@ export default function FAQPage() {
     {
       question: "Qu'est-ce que KFK (KUN FAYA KUN) ?",
       answer:
-        "KFK est une marque lifestyle premium pour hommes. Nous créons mode, accessoires, parfums, djalabiyas et looks complets — de la tête aux pieds. Moderne, chic, élégant, puissant, minimaliste, international.",
+        "KFK est une marque lifestyle premium pour hommes. Nous créons mode, accessoires, parfums, JALABIYAs et looks complets — de la tête aux pieds. Moderne, chic, élégant, puissant, minimaliste, international.",
     },
     {
       question: "Quels sont les quatre départements ?",
       answer:
-        "1) DJALABIYA HOUSE : Tenues traditionnelles modernes, boubous, djalabiyas, kaftans pour cérémonies et célébrations. 2) ACCESSOIRES : Montres, lunettes, parfums, bracelets, bijoux, sacs et sacoches. 3) LOOK & DRIP : Ensembles quotidiens, joggers, chemises, pantalons, sneakers, chaussures, polos. 4) SIGNATURE : Parfums exclusifs, éditions limitées, coffrets cadeaux, accessoires personnalisés.",
+        "1) JALABIYA HOUSE : Tenues traditionnelles modernes, boubous, JALABIYAs, kaftans pour cérémonies et célébrations. 2) ACCESSOIRES : Montres, lunettes, parfums, bracelets, bijoux, sacs et sacoches. 3) LOOK & DRIP : Ensembles quotidiens, joggers, chemises, pantalons, sneakers, chaussures, polos. 4) SIGNATURE : Parfums exclusifs, éditions limitées, coffrets cadeaux, accessoires personnalisés.",
     },
     {
       question: "Que sont les KFK Packs ?",
       answer:
-        "Des looks complets en un clic : Gentleman Pack (pantalon + chemise + montre + parfum), Friday Pack (djalabiya + parfum + montre), Drip Pack (jogger + sneakers + lunettes + bracelet), Executive Pack (costume + montre + sacoche). Chacun offre 19-21% d'économie vs achat séparé.",
+        "Des looks complets en un clic : Gentleman Pack (pantalon + chemise + montre + parfum), Friday Pack (JALABIYA + parfum + montre), Drip Pack (jogger + sneakers + lunettes + bracelet), Executive Pack (costume + montre + sacoche). Chacun offre 19-21% d'économie vs achat séparé.",
     },
     {
       question: "Livrez-vous dans mon pays ?",
-      answer:
-        `Nous livrons en ${siteConfig.legal.shippingCountries.join(", ")}. Les pays disponibles s'affichent au paiement. Livraison offerte dès ${formatPrice(siteConfig.legal.shippingCostThreshold)} d'achat. Consultez notre page Livraison pour les délais et transporteurs.`,
+      answer: `Nous livrons en ${siteConfig.legal.shippingCountries.join(", ")}. Les pays disponibles s'affichent au paiement. Livraison offerte dès ${formatPrice(siteConfig.legal.shippingCostThreshold)} d'achat. Consultez notre page Livraison pour les délais et transporteurs.`,
     },
     {
       question: "Quelle est votre politique de retour ?",
-      answer:
-        `Vous disposez de ${siteConfig.legal.returnWindowDays} jours à compter de la livraison pour demander un retour. Articles non portés, étiquettes et emballage d'origine obligatoires. Articles personnalisés, édition limitée, parfums ouverts non retournables. Contactez ${siteConfig.contact.email} pour initier un retour.`,
+      answer: `Vous disposez de ${siteConfig.legal.returnWindowDays} jours à compter de la livraison pour demander un retour. Articles non portés, étiquettes et emballage d'origine obligatoires. Articles personnalisés, édition limitée, parfums ouverts non retournables. Contactez ${siteConfig.contact.email} pour initier un retour.`,
     },
     {
       question: "Comment fonctionne le service Personal Stylist ?",
-      answer:
-        `Indiquez-nous votre budget et l'occasion. Nos stylistes composent votre look complet de la tête aux pieds depuis les collections KFK. Disponible pour les membres VIP Club et sur demande pour les commandes supérieures à ${formatPrice(convertUsdToXof(500))}.`,
+      answer: `Indiquez-nous votre budget et l'occasion. Nos stylistes composent votre look complet de la tête aux pieds depuis les collections KFK. Disponible pour les membres VIP Club et sur demande pour les commandes supérieures à ${formatPrice(convertUsdToXof(500))}.`,
     },
     {
       question: "Qu'est-ce que le KFK VIP Club ?",
@@ -50,8 +47,7 @@ export default function FAQPage() {
     },
     {
       question: "Quels modes de paiement acceptez-vous ?",
-      answer:
-        `Actuellement : Virement bancaire. Paiement par carte prochainement. Après validation, vous recevez les coordonnées bancaires et le montant total. Utilisez votre numéro de commande comme référence.`,
+      answer: `Actuellement : Virement bancaire. Paiement par carte prochainement. Après validation, vous recevez les coordonnées bancaires et le montant total. Utilisez votre numéro de commande comme référence.`,
     },
     {
       question: "Comment suivre ma commande ?",
@@ -60,8 +56,7 @@ export default function FAQPage() {
     },
     {
       question: "Puis-je modifier ou annuler ma commande ?",
-      answer:
-        `Contactez-nous immédiatement à ${siteConfig.contact.email} avec votre numéro de commande. Nous pouvons modifier/annuler uniquement avant le statut 'en traitement'. Une fois expédiée, plus de modification possible.`,
+      answer: `Contactez-nous immédiatement à ${siteConfig.contact.email} avec votre numéro de commande. Nous pouvons modifier/annuler uniquement avant le statut 'en traitement'. Une fois expédiée, plus de modification possible.`,
     },
     {
       question: "Avez-vous des boutiques physiques ?",
@@ -80,7 +75,10 @@ export default function FAQPage() {
         <header className="faq-header">
           <p className="storefront-eyebrow">CENTRE D'AIDE</p>
           <h1>Questions Fréquentes</h1>
-          <p>Réponses rapides. Besoin d'aide ? <a href="/contact">Contactez-nous</a>.</p>
+          <p>
+            Réponses rapides. Besoin d'aide ?{" "}
+            <a href="/contact">Contactez-nous</a>.
+          </p>
         </header>
 
         <div className="faq-accordion">

@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 export const metadata: Metadata = {
   title: "À Propos de KFK",
   description:
-    "Découvrez KFK (KUN FAYA KUN), la marque lifestyle premium pour hommes. Mode, accessoires, parfums, djalabiyas et looks complets de la tête aux pieds.",
+    "Découvrez KFK (KUN FAYA KUN), la marque lifestyle premium pour hommes. Mode, accessoires, parfums, JALABIYAs et looks complets de la tête aux pieds.",
 };
 
 export default function AboutPage() {
@@ -13,12 +13,14 @@ export default function AboutPage() {
     <main className="about-page">
       <section className="about-hero">
         <div className="about-hero-content">
-          <p className="storefront-eyebrow">LA MARQUE {siteConfig.brand.name}</p>
+          <p className="storefront-eyebrow">
+            LA MARQUE {siteConfig.brand.name}
+          </p>
           <h1>Plus qu'une marque, un art de vivre.</h1>
           <p>
-            KFK est une marque lifestyle premium pour hommes. Nous créons mode, accessoires,
-            parfums, djalabiyas et looks complets — de la tête aux pieds.
-            Moderne, chic, élégant, puissant, minimaliste, international.
+            KFK est une marque lifestyle premium pour hommes. Nous créons mode,
+            accessoires, parfums, JALABIYAs et looks complets — de la tête aux
+            pieds. Moderne, chic, élégant, puissant, minimaliste, international.
           </p>
           <div className="about-actions">
             <Link href="/packs" className="storefront-primary-link">
@@ -41,8 +43,9 @@ export default function AboutPage() {
           <p className="storefront-eyebrow">NOTRE ENGAGEMENT</p>
           <h2>Command Your Destiny</h2>
           <p>
-            Le style n'est pas ce que vous portez. C'est comment vous avancez dans le monde.
-            Quatre départements. Une destination pour l'homme moderne.
+            Le style n'est pas ce que vous portez. C'est comment vous avancez
+            dans le monde. Quatre départements. Une destination pour l'homme
+            moderne.
           </p>
         </div>
         <div className="about-value-grid">
@@ -50,7 +53,7 @@ export default function AboutPage() {
             <span>01</span>
             <h3>Quatre Mondes, Une Vision</h3>
             <p>
-              Djalabiya House, Accessoires, Look & Drip, Signature — chacun un
+              JALABIYA House, Accessoires, Look & Drip, Signature — chacun un
               univers complet. Ensemble, ils vous habillent pour chaque moment.
             </p>
           </article>
@@ -58,8 +61,8 @@ export default function AboutPage() {
             <span>02</span>
             <h3>Packs Sélectionnés</h3>
             <p>
-              Gentleman, Friday, Drip, Executive — un clic, look complet.
-              Aucune hésitation. Juste de la confiance.
+              Gentleman, Friday, Drip, Executive — un clic, look complet. Aucune
+              hésitation. Juste de la confiance.
             </p>
           </article>
           <article>
@@ -67,7 +70,8 @@ export default function AboutPage() {
             <h3>Services Qui Élèvent</h3>
             <p>
               VIP Club pour accès anticipé & exclusivités. Personal Stylist pour
-              looks sur mesure. Livraison mondiale. Éditions limitées numérotées 50/100.
+              looks sur mesure. Livraison mondiale. Éditions limitées numérotées
+              50/100.
             </p>
           </article>
         </div>
@@ -106,17 +110,26 @@ export default function AboutPage() {
           <article className="vision-item">
             <span className="vision-phase">COURT TERME</span>
             <h3>Visibilité & Fidélité</h3>
-            <p>Forte présence de marque. Base clients fidèle. Positionnement premium établi.</p>
+            <p>
+              Forte présence de marque. Base clients fidèle. Positionnement
+              premium établi.
+            </p>
           </article>
           <article className="vision-item">
             <span className="vision-phase">MOYEN TERME</span>
             <h3>Boutiques en Afrique</h3>
-            <p>Multiples boutiques KFK au Bénin et marchés africains clés. Points de contact physiques.</p>
+            <p>
+              Multiples boutiques KFK au Bénin et marchés africains clés. Points
+              de contact physiques.
+            </p>
           </article>
           <article className="vision-item">
             <span className="vision-phase">LONG TERME</span>
             <h3>Marque Lifestyle Homme Internationale</h3>
-            <p>Reconnaissance mondiale. La destination du style masculin de la tête aux pieds.</p>
+            <p>
+              Reconnaissance mondiale. La destination du style masculin de la
+              tête aux pieds.
+            </p>
           </article>
         </div>
       </section>

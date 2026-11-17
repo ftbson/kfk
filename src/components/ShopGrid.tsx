@@ -2,19 +2,34 @@
 
 import React, { useState, useMemo } from "react";
 import ProductCard from "@/components/ProductCard";
-import { productsData, getProductsByDepartment, type Product } from "@/data/products";
+import {
+  productsData,
+  getProductsByDepartment,
+  type Product,
+} from "@/data/products";
 import { siteConfig } from "@/config/site";
 
-type FilterType = "all" | "djalabiya-house" | "accessories" | "look-and-drip" | "signature" | "packs";
+type FilterType =
+  | "all"
+  | "JALABIYA-house"
+  | "accessories"
+  | "look-and-drip"
+  | "signature"
+  | "packs";
 
 interface ShopGridProps {
   initialProducts?: Product[];
   departmentId?: string;
 }
 
-export default function ShopGrid({ initialProducts, departmentId }: ShopGridProps) {
+export default function ShopGrid({
+  initialProducts,
+  departmentId,
+}: ShopGridProps) {
   const [filter, setFilter] = useState<FilterType>("all");
-  const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc" | "newest">("featured");
+  const [sortBy, setSortBy] = useState<
+    "featured" | "price-asc" | "price-desc" | "newest"
+  >("featured");
 
   const baseProducts = useMemo(() => {
     if (initialProducts && initialProducts.length > 0) {
@@ -27,7 +42,8 @@ export default function ShopGrid({ initialProducts, departmentId }: ShopGridProp
   }, [initialProducts, departmentId]);
 
   const filteredProducts = useMemo(() => {
-    let result: Product[] = filter === "all" ? baseProducts : getProductsByDepartment(filter);
+    let result: Product[] =
+      filter === "all" ? baseProducts : getProductsByDepartment(filter);
 
     switch (sortBy) {
       case "price-asc":
@@ -43,8 +59,10 @@ export default function ShopGrid({ initialProducts, departmentId }: ShopGridProp
       default:
         // Featured first (badged items), then rest
         result = [...result].sort((a, b) => {
-          const aFeatured = a.badge || a.isLimitedEdition || a.isVipExclusive ? 1 : 0;
-          const bFeatured = b.badge || b.isLimitedEdition || b.isVipExclusive ? 1 : 0;
+          const aFeatured =
+            a.badge || a.isLimitedEdition || a.isVipExclusive ? 1 : 0;
+          const bFeatured =
+            b.badge || b.isLimitedEdition || b.isVipExclusive ? 1 : 0;
           return bFeatured - aFeatured;
         });
         break;
@@ -55,7 +73,7 @@ export default function ShopGrid({ initialProducts, departmentId }: ShopGridProp
 
   const departments = [
     { value: "all", label: "All Collections" },
-    { value: "djalabiya-house", label: "Djalabiya House" },
+    { value: "JALABIYA-house", label: "JALABIYA House" },
     { value: "accessories", label: "Accessories" },
     { value: "look-and-drip", label: "Look & Drip" },
     { value: "signature", label: "Signature" },
@@ -67,7 +85,9 @@ export default function ShopGrid({ initialProducts, departmentId }: ShopGridProp
       {/* Filter & Sort Bar */}
       <div className="shop-toolbar">
         <div className="shop-filter">
-          <label htmlFor="department-filter" className="visually-hidden">Filter by department</label>
+          <label htmlFor="department-filter" className="visually-hidden">
+            Filter by department
+          </label>
           <select
             id="department-filter"
             value={filter}
@@ -75,13 +95,17 @@ export default function ShopGrid({ initialProducts, departmentId }: ShopGridProp
             className="shop-select"
           >
             {departments.map((dept) => (
-              <option key={dept.value} value={dept.value}>{dept.label}</option>
+              <option key={dept.value} value={dept.value}>
+                {dept.label}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="shop-sort">
-          <label htmlFor="sort-select" className="visually-hidden">Sort by</label>
+          <label htmlFor="sort-select" className="visually-hidden">
+            Sort by
+          </label>
           <select
             id="sort-select"
             value={sortBy}
@@ -96,12 +120,17 @@ export default function ShopGrid({ initialProducts, departmentId }: ShopGridProp
         </div>
 
         <div className="shop-count" aria-live="polite">
-          {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"} found
+          {filteredProducts.length}{" "}
+          {filteredProducts.length === 1 ? "product" : "products"} found
         </div>
       </div>
 
       {/* Product Grid */}
-      <div className="storefront-product-grid" role="list" aria-label="Product listing">
+      <div
+        className="storefront-product-grid"
+        role="list"
+        aria-label="Product listing"
+      >
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -120,7 +149,11 @@ export default function ShopGrid({ initialProducts, departmentId }: ShopGridProp
       {/* Pagination placeholder - future enhancement */}
       {filteredProducts.length > 12 && (
         <div className="shop-pagination">
-          <button className="pagination-btn" disabled aria-label="Previous page">
+          <button
+            className="pagination-btn"
+            disabled
+            aria-label="Previous page"
+          >
             <i className="fa-solid fa-chevron-left"></i>
           </button>
           <span className="pagination-current">Page 1</span>

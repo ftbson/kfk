@@ -3,15 +3,15 @@ import { siteConfig, getDepartmentById } from "@/config/site";
 import { getProductsByDepartment } from "@/data/products";
 import ShopGrid from "@/components/ShopGrid";
 
-const department = getDepartmentById("djalabiya-house")!;
-const products = getProductsByDepartment("djalabiya-house");
+const department = getDepartmentById("JALABIYA-house")!;
+const products = getProductsByDepartment("JALABIYA-house");
 
 export const metadata = {
   title: department.name,
   description: department.description,
 };
 
-export default function DjalabiyaHousePage() {
+export default function JALABIYAHousePage() {
   return (
     <main className="department-page">
       <header className="department-header">
@@ -34,7 +34,7 @@ export default function DjalabiyaHousePage() {
 
       <section className="department-products">
         <div className="container">
-          <ShopGrid initialProducts={products} departmentId="djalabiya-house" />
+          <ShopGrid initialProducts={products} departmentId="JALABIYA-house" />
         </div>
       </section>
     </main>

@@ -2,41 +2,41 @@
 
 > **THE LIFESTYLE BRAND** — Command Your Destiny
 
-KFK is a premium men's lifestyle brand creating fashion, accessories, fragrances, djalabiyas, and complete looks — from head to toe. Modern, chic, elegant, powerful, minimalist, international.
+KFK is a premium men's lifestyle brand creating fashion, accessories, fragrances, JALABIYAs, and complete looks — from head to toe. Modern, chic, elegant, powerful, minimalist, international.
 
 ## 🌍 Brand Identity
 
-| Property | Value |
-|----------|-------|
-| **Name** | KFK (KUN FAYA KUN) |
-| **Baseline** | THE LIFESTYLE BRAND |
-| **Slogan** | COMMAND YOUR DESTINY |
-| **Tagline** | KFK (KUN FAYA KUN) — From head to toe |
-| **Positioning** | Premium men's lifestyle: fashion, accessories, fragrances, djalabiyas, complete looks. Modern, chic, elegant, powerful, minimalist, international. |
-| **Colors** | Primary: `#0A0A0A` (Deep Charcoal) · Accent: `#C9A876` (Champagne Gold) · Background: `#FFFFFF` · Text: `#1A1A1A` · Muted: `#6B6B6B` |
-| **Target** | Men 25–45, urban, style-conscious, medium-high income, Africa & diaspora, global |
-| **Tone** | Confident, minimal, authoritative, aspirational, respectful |
-| **Vision** | Short (6m): Launch 4 depts + packs, VIP club, Benin flagship · Medium (18m): Africa boutiques, bespoke, women's capsule · Long (5y): Global flagship stores, KFK fragrance house, lifestyle ecosystem |
+| Property        | Value                                                                                                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**        | KFK (KUN FAYA KUN)                                                                                                                                                                                    |
+| **Baseline**    | THE LIFESTYLE BRAND                                                                                                                                                                                   |
+| **Slogan**      | COMMAND YOUR DESTINY                                                                                                                                                                                  |
+| **Tagline**     | KFK (KUN FAYA KUN) — From head to toe                                                                                                                                                                 |
+| **Positioning** | Premium men's lifestyle: fashion, accessories, fragrances, JALABIYAs, complete looks. Modern, chic, elegant, powerful, minimalist, international.                                                     |
+| **Colors**      | Primary: `#0A0A0A` (Deep Charcoal) · Accent: `#C9A876` (Champagne Gold) · Background: `#FFFFFF` · Text: `#1A1A1A` · Muted: `#6B6B6B`                                                                  |
+| **Target**      | Men 25–45, urban, style-conscious, medium-high income, Africa & diaspora, global                                                                                                                      |
+| **Tone**        | Confident, minimal, authoritative, aspirational, respectful                                                                                                                                           |
+| **Vision**      | Short (6m): Launch 4 depts + packs, VIP club, Benin flagship · Medium (18m): Africa boutiques, bespoke, women's capsule · Long (5y): Global flagship stores, KFK fragrance house, lifestyle ecosystem |
 
 ## 🏗 Architecture
 
 ### Departments (4) + Packs
 
-| Department | ID | Description |
-|------------|-----|-------------|
-| **Djalabiya House** | `djalabiya-house` | Modern traditional outfits, boubous, djalabiyas, kaftans for ceremonies & celebrations |
-| **Accessories** | `accessories` | Watches, sunglasses, perfumes, bracelets, jewelry, bags & satchels |
-| **Look & Drip** | `look-and-drip` | Everyday sets, joggers, shirts, trousers, sneakers, shoes, polos |
-| **Signature** | `signature` | Exclusive fragrances, limited editions, gift boxes, personalized accessories |
+| Department         | ID               | Description                                                                           |
+| ------------------ | ---------------- | ------------------------------------------------------------------------------------- |
+| **JALABIYA House** | `JALABIYA-house` | Modern traditional outfits, boubous, JALABIYAs, kaftans for ceremonies & celebrations |
+| **Accessories**    | `accessories`    | Watches, sunglasses, perfumes, bracelets, jewelry, bags & satchels                    |
+| **Look & Drip**    | `look-and-drip`  | Everyday sets, joggers, shirts, trousers, sneakers, shoes, polos                      |
+| **Signature**      | `signature`      | Exclusive fragrances, limited editions, gift boxes, personalized accessories          |
 
 ### Packs (4 Curated Complete Looks)
 
-| Pack | Savings | Contents |
-|------|---------|----------|
-| **Gentleman Pack** | 19% | Trousers + Shirt + Watch + Perfume |
-| **Friday Pack** | 20% | Djalabiya + Perfume + Watch |
-| **Drip Pack** | 21% | Jogger + Sneakers + Sunglasses + Bracelet |
-| **Executive Pack** | 20% | Suit + Watch + Satchel |
+| Pack               | Savings | Contents                                  |
+| ------------------ | ------- | ----------------------------------------- |
+| **Gentleman Pack** | 19%     | Trousers + Shirt + Watch + Perfume        |
+| **Friday Pack**    | 20%     | JALABIYA + Perfume + Watch                |
+| **Drip Pack**      | 21%     | Jogger + Sneakers + Sunglasses + Bracelet |
+| **Executive Pack** | 20%     | Suit + Watch + Satchel                    |
 
 ## 🛠 Tech Stack
 
@@ -56,7 +56,7 @@ src/
 │   ├── admin/              # Admin dashboard (orders, bank details)
 │   ├── api/                # API routes (auth, orders, bank-details, admin)
 │   ├── categorie/          # Department pages (4 depts)
-│   │   ├── djalabiya-house/
+│   │   ├── JALABIYA-house/
 │   │   ├── accessories/
 │   │   ├── look-and-drip/
 │   │   └── signature/
@@ -120,12 +120,12 @@ src/
 // Example: Access anywhere
 import { siteConfig, getDepartmentById } from "@/config/site";
 
-siteConfig.brand.name        // "KFK"
-siteConfig.brand.baseline    // "THE LIFESTYLE BRAND"
-siteConfig.departments       // Array of 4 departments
-siteConfig.packs             // Array of 4 packs
-siteConfig.currency          // { code: "USD", symbol: "$", locale: "en-US" }
-siteConfig.legal             // Placeholders for jurisdiction-specific info
+siteConfig.brand.name; // "KFK"
+siteConfig.brand.baseline; // "THE LIFESTYLE BRAND"
+siteConfig.departments; // Array of 4 departments
+siteConfig.packs; // Array of 4 packs
+siteConfig.currency; // { code: "USD", symbol: "$", locale: "en-US" }
+siteConfig.legal; // Placeholders for jurisdiction-specific info
 ```
 
 ### Environment Variables (`.env.local`)
@@ -174,6 +174,7 @@ NEXT_PUBLIC_COMPANY_PHONE="..."
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
 - pnpm (recommended) or npm
 - Turso database (free tier available at [turso.tech](https://turso.tech))
@@ -201,50 +202,52 @@ pnpm dev            # http://localhost:3000
 ```
 
 ### Database Studio
+
 ```bash
 pnpm db:studio      # Opens Drizzle Studio at http://localhost:4983
 ```
 
 ## 📦 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Production build |
-| `pnpm start` | Start production server |
-| `pnpm lint` | Run ESLint |
+| Command            | Description                 |
+| ------------------ | --------------------------- |
+| `pnpm dev`         | Start development server    |
+| `pnpm build`       | Production build            |
+| `pnpm start`       | Start production server     |
+| `pnpm lint`        | Run ESLint                  |
 | `pnpm db:generate` | Generate Drizzle migrations |
-| `pnpm db:push` | Push schema to database |
-| `pnpm db:migrate` | Run pending migrations |
-| `pnpm db:studio` | Open Drizzle Studio |
+| `pnpm db:push`     | Push schema to database     |
+| `pnpm db:migrate`  | Run pending migrations      |
+| `pnpm db:studio`   | Open Drizzle Studio         |
 
 ## 🌐 Pages & Routes
 
-| Route | Description |
-|-------|-------------|
-| `/` | Homepage (Hero, Categories, Best Sellers, Why Us, Testimonials) |
-| `/packs` | KFK Packs (4 curated looks) |
-| `/categorie/djalabiya-house` | Djalabiya House department |
-| `/categorie/accessories` | Accessories department |
-| `/categorie/look-and-drip` | Look & Drip department |
-| `/categorie/signature` | Signature department |
-| `/vip-club` | VIP Club landing page |
-| `/a-propos` | About KFK (vision, timeline) |
-| `/contact` | Contact form + FAQ |
-| `/cart` | Shopping cart + checkout (bank transfer) |
-| `/favorites` | Wishlist |
-| `/account` | Customer account + order history |
-| `/login` | Login / Register |
-| `/faq` | Frequently Asked Questions |
-| `/shipping` | Shipping policy |
-| `/returns` | Returns policy |
-| `/terms` | Terms of Sale |
-| `/legal/privacy` | Privacy Policy |
-| `/legal/impressum` | Legal Notice (Impressum) |
-| `/legal/cookies` | Cookies Policy |
-| `/admin` | Admin dashboard (orders, bank details) |
+| Route                       | Description                                                     |
+| --------------------------- | --------------------------------------------------------------- |
+| `/`                         | Homepage (Hero, Categories, Best Sellers, Why Us, Testimonials) |
+| `/packs`                    | KFK Packs (4 curated looks)                                     |
+| `/categorie/JALABIYA-house` | JALABIYA House department                                       |
+| `/categorie/accessories`    | Accessories department                                          |
+| `/categorie/look-and-drip`  | Look & Drip department                                          |
+| `/categorie/signature`      | Signature department                                            |
+| `/vip-club`                 | VIP Club landing page                                           |
+| `/a-propos`                 | About KFK (vision, timeline)                                    |
+| `/contact`                  | Contact form + FAQ                                              |
+| `/cart`                     | Shopping cart + checkout (bank transfer)                        |
+| `/favorites`                | Wishlist                                                        |
+| `/account`                  | Customer account + order history                                |
+| `/login`                    | Login / Register                                                |
+| `/faq`                      | Frequently Asked Questions                                      |
+| `/shipping`                 | Shipping policy                                                 |
+| `/returns`                  | Returns policy                                                  |
+| `/terms`                    | Terms of Sale                                                   |
+| `/legal/privacy`            | Privacy Policy                                                  |
+| `/legal/impressum`          | Legal Notice (Impressum)                                        |
+| `/legal/cookies`            | Cookies Policy                                                  |
+| `/admin`                    | Admin dashboard (orders, bank details)                          |
 
 **Legacy redirects (French/German → English):**
+
 - `/panier` → `/cart`
 - `/connexion` → `/login`
 - `/compte` → `/account`
@@ -279,7 +282,7 @@ pnpm db:studio      # Opens Drizzle Studio at http://localhost:4983
 - `manifest.ts` generates `manifest.json`
 - Icons in `/public/icons/` (72×72 → 512×512)
 - Screenshots in `/public/screenshots/`
-- Shortcuts: Packs, Djalabiya House, Accessories, Cart
+- Shortcuts: Packs, JALABIYA House, Accessories, Cart
 - Installable on mobile/desktop
 
 ## 🔍 SEO & Metadata
@@ -341,24 +344,26 @@ All legal pages (`/legal/privacy`, `/legal/impressum`, `/legal/cookies`, `/shipp
 Defined in `:root` via `siteConfig.colors` in `layout.tsx`:
 
 ```css
---color-primary: #0A0A0A;      /* Deep Charcoal */
---color-accent: #C9A876;       /* Champagne Gold */
---color-background: #FFFFFF;   /* Pure White */
---color-text: #1A1A1A;         /* Near Black */
---color-muted: #6B6B6B;        /* Medium Gray */
---color-border: #E5E5E5;       /* Light Gray */
---color-error: #B71C1C;        /* Deep Red */
---color-success: #1B5E20;      /* Deep Green */
+--color-primary: #0a0a0a; /* Deep Charcoal */
+--color-accent: #c9a876; /* Champagne Gold */
+--color-background: #ffffff; /* Pure White */
+--color-text: #1a1a1a; /* Near Black */
+--color-muted: #6b6b6b; /* Medium Gray */
+--color-border: #e5e5e5; /* Light Gray */
+--color-error: #b71c1c; /* Deep Red */
+--color-success: #1b5e20; /* Deep Green */
 ```
 
 ## 📦 Deployment
 
 ### Vercel (Recommended)
+
 1. Connect GitHub repo to Vercel
 2. Add environment variables from `.env.local`
 3. Deploy — automatic on push to main
 
 ### Docker
+
 ```dockerfile
 FROM node:20-alpine
 WORKDIR /app
@@ -386,4 +391,4 @@ Proprietary — All rights reserved. KFK (KUN FAYA KUN) © 2025+
 
 **Built with Next.js 16, React 19, TypeScript, Drizzle ORM, Turso, and ❤️ for the culture.**
 
-*Command Your Destiny.*
+_Command Your Destiny._

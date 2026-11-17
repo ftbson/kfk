@@ -13,27 +13,23 @@ export default function ContactPage() {
     {
       question: "Quel département KFK me correspond ?",
       answer:
-        "DJALABIYA HOUSE : Tenues traditionnelles modernes pour cérémonies et célébrations. ACCESSOIRES : Montres, lunettes, parfums, bijoux, sacs. LOOK & DRIP : Ensembles quotidiens, joggers, sneakers, chemises. SIGNATURE : Parfums exclusifs, éditions limitées, cadeaux personnalisés. PACKS : Looks complets sélectionnés (Gentleman, Friday, Drip, Executive).",
+        "JALABIYA HOUSE : Tenues traditionnelles modernes pour cérémonies et célébrations. ACCESSOIRES : Montres, lunettes, parfums, bijoux, sacs. LOOK & DRIP : Ensembles quotidiens, joggers, sneakers, chemises. SIGNATURE : Parfums exclusifs, éditions limitées, cadeaux personnalisés. PACKS : Looks complets sélectionnés (Gentleman, Friday, Drip, Executive).",
     },
     {
       question: "Livrez-vous à l'international ?",
-      answer:
-        `Oui. Nous livrons en ${siteConfig.legal.shippingCountries.join(", ")}. Les frais et délais varient selon la région. Livraison offerte dès ${formatPrice(siteConfig.legal.shippingCostThreshold)} d'achat. Consultez notre page Livraison pour les détails.`,
+      answer: `Oui. Nous livrons en ${siteConfig.legal.shippingCountries.join(", ")}. Les frais et délais varient selon la région. Livraison offerte dès ${formatPrice(siteConfig.legal.shippingCostThreshold)} d'achat. Consultez notre page Livraison pour les détails.`,
     },
     {
       question: "Quelle est votre politique de retour ?",
-      answer:
-        `Vous disposez de ${siteConfig.legal.returnWindowDays} jours à compter de la livraison pour demander un retour. Articles non portés, étiquettes et emballage d'origine obligatoires. Certains articles (personnalisés, édition limitée, parfums ouverts) ne sont pas retournables. Contactez-nous à ${siteConfig.contact.email} pour initier un retour.`,
+      answer: `Vous disposez de ${siteConfig.legal.returnWindowDays} jours à compter de la livraison pour demander un retour. Articles non portés, étiquettes et emballage d'origine obligatoires. Certains articles (personnalisés, édition limitée, parfums ouverts) ne sont pas retournables. Contactez-nous à ${siteConfig.contact.email} pour initier un retour.`,
     },
     {
       question: "Comment fonctionne le service Personal Stylist ?",
-      answer:
-        `Indiquez-nous votre budget et l'occasion. Nos stylistes composent votre look complet de la tête aux pieds depuis les collections KFK. Disponible pour les membres VIP Club et sur demande pour les commandes supérieures à ${formatPrice(convertUsdToXof(500))}.`,
+      answer: `Indiquez-nous votre budget et l'occasion. Nos stylistes composent votre look complet de la tête aux pieds depuis les collections KFK. Disponible pour les membres VIP Club et sur demande pour les commandes supérieures à ${formatPrice(convertUsdToXof(500))}.`,
     },
     {
       question: "Quels modes de paiement acceptez-vous ?",
-      answer:
-        `Actuellement : Virement bancaire. Paiement par carte prochainement. Après validation, vous recevez les coordonnées bancaires et le montant total. Utilisez votre numéro de commande comme référence.`,
+      answer: `Actuellement : Virement bancaire. Paiement par carte prochainement. Après validation, vous recevez les coordonnées bancaires et le montant total. Utilisez votre numéro de commande comme référence.`,
     },
   ];
 
@@ -82,7 +78,8 @@ export default function ContactPage() {
           <p className="storefront-eyebrow">{siteConfig.brand.name} SERVICE</p>
           <h1>Nous Sommes Là Pour Vous</h1>
           <p>
-            Une question sur nos collections, une commande ou nos services ? Écrivez-nous.
+            Une question sur nos collections, une commande ou nos services ?
+            Écrivez-nous.
           </p>
         </header>
         <div className="contact-grid">
@@ -166,7 +163,9 @@ export default function ContactPage() {
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "ENVOI EN COURS..." : "ENVOYER LE MESSAGE"}
-                {!isSubmitting && <i className="fa-solid fa-arrow-right" aria-hidden="true" />}
+                {!isSubmitting && (
+                  <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+                )}
               </button>
               {formMessage && <p role="status">{formMessage}</p>}
             </form>
