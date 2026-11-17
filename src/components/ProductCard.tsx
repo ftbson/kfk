@@ -1,24 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { formatPrice } from "@/lib/currency";
+import { siteConfig } from "@/config/site";
 
 interface ProductCardProps {
   product: Product;
+  variant?: "default" | "compact";
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, variant = "default" }: ProductCardProps) {
   const { addToCart, toggleFavorite: updateFavorite, isFavorite } = useCart();
+  const [imageUnavailable, setImageUnavailable] = useState(false);
 
   if (!product) {
     return null;
   }
 
   const favorite = isFavorite(product.id);
-
   const toggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -28,112 +31,77 @@ export default function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product);
+    addToCart({
+      id: product.id,
+      title: product.title,
+      category: product.category,
+      price: product.price,
+      oldPrice: product.oldPrice,
+      image: product.image,
+    });
   };
 
   return (
-    <div className="KUN FAYA KUN-product-card">
-      {/* Badge PROMO conditionnel (affiché seulement si le produit est en promo) */}
-      {product.badgePromo && (
-        <span className="KUN FAYA KUN-badge-promo">PROMO</span>
-      )}
-
-      {/* Zone Supérieure : Marque, Image & Favori */}
-      <div className="KUN FAYA KUN-card-top">
-        <span className="KUN FAYA KUN-brand-label">{product.brand}</span>
-
+    <article className={`kfk-product-card ${variant === "compact" ? "compact" : ""}`}>
+      <div className="kfk-card-top">
         <Link
-          href={`/produkt/${product.id}`}
-          className="KUN FAYA KUN-card-img-wrapper"
+          href={getProductLink(product)}
+          className="kfk-card-img-wrapper"
+          aria-label={`Voir ${product.title}`}
         >
-          <Image
-            src={product.image}
-            alt={product.title}
-            width={320}
-            height={220}
-            className="KUN FAYA KUN-card-img"
-          />
+          {imageUnavailable ? (
+            <span className="kfk-card-image-fallback" aria-hidden="true">
+              <i className="fa-solid fa-shirt" />
+              <span>{siteConfig.brand.shortName}</span>
+            </span>
+          ) : (
+            <Image
+              src={product.image}
+              alt={product.title}
+              width={320}
+              height={220}
+              className="kfk-card-img"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              onError={() => setImageUnavailable(true)}
+            />
+          )}
         </Link>
 
-        {/* Bouton Favori en bas à gauche du visuel */}
         <button
-          className={`KUN FAYA KUN-wishlist-btn ${favorite ? "active" : ""}`}
+          className={`kfk-wishlist-btn ${favorite ? "active" : ""}`}
           onClick={toggleFavorite}
-          aria-label={
-            favorite
-              ? "Aus Wunschliste entfernen"
-              : "Zur Wunschliste hinzufügen"
-          }
+          aria-label={favorite ? "Retirer des favoris" : "Ajouter aux favoris"}
           aria-pressed={favorite}
         >
-          <i
-            className={favorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}
-          ></i>
+          <i className={favorite ? "fa-solid fa-heart" : "fa-regular fa-heart"} aria-hidden="true"></i>
         </button>
-
-        {/* Badge Catégorie (VILLE, VTC, VTT) en bas à droite de l'image */}
-        <span
-          className={`KUN FAYA KUN-badge-cat cat-${product.category?.toLowerCase()}`}
-        >
-          {product.category}
-        </span>
       </div>
 
-      {/* Informations & Spécifications */}
-      <div className="KUN FAYA KUN-card-info">
-        <span className="KUN FAYA KUN-sub-cat">{product.categoryLabel}</span>
-        <h3 className="KUN FAYA KUN-product-title">
-          <Link href={`/produkt/${product.id}`}>{product.title}</Link>
+      <div className="kfk-card-info">
+        <span className="kfk-product-category">{product.category}</span>
+        <h3 className="kfk-product-title">
+          <Link href={getProductLink(product)}>{product.title}</Link>
         </h3>
-
-        <div className="KUN FAYA KUN-specs-row">
-          <span className="KUN FAYA KUN-spec-item">
-            <i className="fa-solid fa-gear"></i> {product.motorTorque}
-          </span>
-          <span className="KUN FAYA KUN-spec-item">
-            <i className="fa-solid fa-battery-three-quarters"></i>{" "}
-            {product.batteryCapacity}
-          </span>
-        </div>
       </div>
 
-      {/* Bas de Carte : Prix & Bouton Ajouter au Panier */}
-      <div className="KUN FAYA KUN-card-bottom">
-        <div className="KUN FAYA KUN-price-block">
-          <div className="KUN FAYA KUN-price-main">
-            <span className="KUN FAYA KUN-current-price">
-              CHF {product.price?.toFixed(2)}
-            </span>
-            {product.oldPrice && (
-              <span className="KUN FAYA KUN-old-price">
-                CHF {product.oldPrice.toFixed(2)}
-              </span>
-            )}
-            {product.discount && (
-              <span className="KUN FAYA KUN-discount-tag">
-                {product.discount}
-              </span>
-            )}
-          </div>
-          {product.savings && (
-            <span className="KUN FAYA KUN-savings-text">
-              Sie sparen CHF {product.savings.toFixed(2)}
-            </span>
-          )}
-        </div>
+      <div className="kfk-card-bottom">
+        <span className="kfk-current-price">{formatPrice(product.price)}</span>
 
-        {/* Bouton Ajouter au panier direct sur la carte */}
-        <div className="KUN FAYA KUN-card-actions">
+        <div className="kfk-card-actions">
           <button
-            className="KUN FAYA KUN-add-cart-btn"
+            className="kfk-add-cart-btn"
             onClick={handleAddToCart}
-            title="In den Warenkorb"
-            aria-label={`${product.title} in den Warenkorb legen`}
+            aria-label={`Ajouter ${product.title} au panier`}
           >
-            <i className="fa-solid fa-cart-shopping"></i>
+            <i className="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+            <span className="btn-text">Ajouter au panier</span>
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
+}
+
+function getProductLink(product: Product): string {
+  return `/products/${product.id}`;
 }

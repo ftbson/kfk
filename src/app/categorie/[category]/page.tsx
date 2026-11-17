@@ -1,22 +1,24 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
-import { productsData, type Product } from "@/data/products";
+import { productsData } from "@/data/products";
+import { siteConfig } from "@/config/site";
 
-const categories = {
-  ville: { label: "E-Bikes für die Stadt", code: "VILLE" },
-  vtc: { label: "Trekking- und Touren-E-Bikes", code: "VTC" },
-  vtt: { label: "E-Mountainbikes", code: "VTT" },
-} as const satisfies Record<string, { label: string; code: Product["category"] }>;
+const departments = {
+  "djalabiya-house": { label: "DJALABIYA HOUSE" },
+  accessories: { label: "ACCESSOIRES" },
+  "look-and-drip": { label: "LOOK & DRIP" },
+  signature: { label: "SIGNATURE" },
+} as const satisfies Record<string, { label: string }>;
 
-type CategorySlug = keyof typeof categories;
+type DepartmentSlug = keyof typeof departments;
 
-function isCategorySlug(value: string): value is CategorySlug {
-  return Object.hasOwn(categories, value);
+function isDepartmentSlug(value: string): value is DepartmentSlug {
+  return Object.hasOwn(departments, value);
 }
 
 export function generateStaticParams() {
-  return Object.keys(categories).map((category) => ({ category }));
+  return Object.keys(departments).map((dept) => ({ category: dept }));
 }
 
 export default async function CategoryPage({
@@ -25,31 +27,38 @@ export default async function CategoryPage({
   params: Promise<{ category: string }>;
 }) {
   const { category } = await params;
-  if (!isCategorySlug(category)) notFound();
+  if (!isDepartmentSlug(category)) notFound();
 
-  const selectedCategory = categories[category];
+  const selectedDept = departments[category];
+  const deptConfig = siteConfig.departments.find((d) => d.id === category);
+
   const products = productsData.filter(
-    (product) => product.category === selectedCategory.code,
+    (product) => product.department === category,
   );
 
   return (
     <main className="catalog-page">
       <header className="catalog-heading">
-        <p className="storefront-eyebrow">UNSERE KATEGORIEN</p>
-        <h1>{selectedCategory.label}</h1>
-        <p>{products.length} Modelle in dieser Kategorie</p>
+        <p className="storefront-eyebrow">CINQ MONDES. UNE DESTINÉE.</p>
+        <h1>{selectedDept.label}</h1>
+        <p>
+          {deptConfig?.description ?? `${products.length} articles dans ce département`}
+        </p>
       </header>
       <div className="storefront-product-grid">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      {products.length === 0 && (
+        <p className="catalog-empty">Aucun article disponible pour le moment.</p>
+      )}
       <div className="storefront-actions">
         <Link href="/categorie" className="storefront-secondary-link">
-          Alle Kategorien
+          Tous Les Départements
         </Link>
-        <Link href="/products" className="storefront-primary-link">
-          Gesamtes Sortiment
+        <Link href="/packs" className="storefront-primary-link">
+          Voir Les Packs
           <i className="fa-solid fa-arrow-right" aria-hidden="true" />
         </Link>
       </div>

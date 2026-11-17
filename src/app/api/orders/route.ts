@@ -11,6 +11,8 @@ import { db } from "@/lib/db";
 import { orderItems, orders } from "@/lib/schema";
 import { sendMail } from "@/lib/mail";
 import { productsData } from "@/data/products";
+import { siteConfig } from "@/config/site";
+import { formatPrice } from "@/lib/currency";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -19,7 +21,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 // Create an order from catalog prices, never from client-provided totals.
 export async function POST(request: Request) {
   if (!isSameOriginRequest(request)) {
-    return NextResponse.json({ error: "Ungültige Anfrage." }, { status: 403 });
+    return NextResponse.json({ error: "Invalid request." }, { status: 403 });
   }
 
   try {
@@ -30,7 +32,7 @@ export async function POST(request: Request) {
       !Array.isArray(body.items)
     ) {
       return NextResponse.json(
-        { error: "Ungültige Bestelldaten." },
+        { error: "Invalid order data." },
         { status: 400 },
       );
     }
@@ -76,13 +78,13 @@ export async function POST(request: Request) {
       email.length > 254
     ) {
       return NextResponse.json(
-        { error: "Bitte überprüfen Sie Ihre Kontakt- und Lieferdaten." },
+        { error: "Please check your contact and shipping details." },
         { status: 400 },
       );
     }
     if (body.items.length === 0 || body.items.length > 40) {
       return NextResponse.json(
-        { error: "Der Warenkorb ist leer oder ungültig." },
+        { error: "Cart is empty or invalid." },
         { status: 400 },
       );
     }
@@ -96,7 +98,7 @@ export async function POST(request: Request) {
         !Number.isInteger(rawItem.quantity)
       ) {
         return NextResponse.json(
-          { error: "Ungültige Produktangaben." },
+          { error: "Invalid product data." },
           { status: 400 },
         );
       }
@@ -108,7 +110,7 @@ export async function POST(request: Request) {
         quantity < 1
       ) {
         return NextResponse.json(
-          { error: "Ungültiges Produkt oder ungültige Menge." },
+          { error: "Invalid product or quantity." },
           { status: 400 },
         );
       }
@@ -132,15 +134,18 @@ export async function POST(request: Request) {
       (sum, item) => sum + item.unitPrice * item.quantity,
       0,
     );
-    const shippingCost = subtotal > 150 ? 0 : 15;
+    const shippingCost =
+      subtotal > siteConfig.legal.shippingCostThreshold ||
+      items.length === 0
+        ? 0
+        : siteConfig.legal.shippingCostBase;
     const grandTotal = subtotal + shippingCost;
     const customerSession = await getAuthenticatedUser();
     const orderEmail = customerSession?.email ?? email;
     if (await isRateLimited("order", orderEmail, 5, 60 * 60 * 1000)) {
       return NextResponse.json(
         {
-          error:
-            "Zu viele Bestellungen in kurzer Zeit. Bitte kontaktieren Sie uns.",
+          error: "Too many orders in a short time. Please contact us.",
         },
         { status: 429 },
       );
@@ -178,35 +183,35 @@ export async function POST(request: Request) {
     let emailNotificationSent = true;
     try {
       await sendMail({
-        subject: `[KUN FAYA KUN-Bestellung] ${orderId} - ${firstName} ${lastName}`,
+        subject: `[KFK Order] ${orderId} - ${firstName} ${lastName}`,
         replyTo: orderEmail,
         text: [
-          "Neue KUN FAYA KUN-Bestellung",
+          "New KFK Order",
           "",
-          `Bestellnummer: ${orderId}`,
-          `Kunde: ${firstName} ${lastName}`,
-          `Land: ${country}`,
-          `Lieferadresse: ${streetAddress}`,
-          `Telefon: ${whatsapp}`,
-          `E-Mail: ${orderEmail}`,
+          `Order Number: ${orderId}`,
+          `Customer: ${firstName} ${lastName}`,
+          `Country: ${country}`,
+          `Shipping Address: ${streetAddress}`,
+          `Phone: ${whatsapp}`,
+          `Email: ${orderEmail}`,
           "",
-          "Produkte:",
+          "Products:",
           ...items.map(
             (item) =>
-              `- ${item.quantity} x ${item.title} (${item.category}) - CHF ${(item.unitPrice * item.quantity).toFixed(2)}`,
+              `- ${item.quantity} x ${item.title} (${item.category}) - ${formatPrice(item.unitPrice * item.quantity)}`,
           ),
           "",
-          `Zwischensumme: CHF ${subtotal.toFixed(2)}`,
-          `Lieferung: CHF ${shippingCost.toFixed(2)}`,
-          `Gesamt: CHF ${grandTotal.toFixed(2)}`,
+          `Subtotal: ${formatPrice(subtotal)}`,
+          `Shipping: ${formatPrice(shippingCost)}`,
+          `Total: ${formatPrice(grandTotal)}`,
           "Status: pending",
-          `Datum: ${createdAt}`,
+          `Date: ${createdAt}`,
         ].join("\n"),
       });
     } catch (error) {
       emailNotificationSent = false;
       console.error(
-        `Commande ${orderId} enregistrée, mais l'e-mail admin a échoué :`,
+        `Order ${orderId} saved, but admin email failed:`,
         error,
       );
     }
@@ -223,9 +228,9 @@ export async function POST(request: Request) {
       { status: 201, headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
-    console.error("Erreur lors de la création de la commande :", error);
+    console.error("Error creating order:", error);
     return NextResponse.json(
-      { error: "Fehler beim Erstellen der Bestellung" },
+      { error: "Error creating order" },
       { status: 500 },
     );
   }
@@ -235,7 +240,7 @@ export async function GET() {
   try {
     if (!(await isAdminAuthenticated())) {
       return NextResponse.json(
-        { error: "Accès non autorisé." },
+        { error: "Unauthorized access." },
         { status: 401 },
       );
     }
@@ -274,9 +279,9 @@ export async function GET() {
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
-    console.error("Erreur lors du chargement des commandes :", error);
+    console.error("Error loading orders:", error);
     return NextResponse.json(
-      { error: "Fehler beim Laden der Bestellungen" },
+      { error: "Error loading orders" },
       { status: 500 },
     );
   }

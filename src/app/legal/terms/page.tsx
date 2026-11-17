@@ -1,20 +1,5 @@
-import type { Metadata } from "next";
-import LegalDocument from "@/components/LegalDocument";
-import TermsContent from "@/components/TermsContent";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Allgemeine Geschäftsbedingungen",
-  description:
-    "Allgemeine Geschäftsbedingungen für Bestellungen bei KUN FAYA KUN.",
-};
-
-export default function TermsPage() {
-  return (
-    <LegalDocument
-      title="Allgemeine Geschäftsbedingungen"
-      description="Bedingungen für Bestellungen im KUN FAYA KUN-Onlineshop."
-    >
-      <TermsContent />
-    </LegalDocument>
-  );
+export default function LegalTermsPage() {
+  redirect("/terms");
 }

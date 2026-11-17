@@ -6,60 +6,50 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { siteConfig } from "@/config/site";
 
-// Configuration SEO Avancée - KFK (KUN FAYA KUN) - The Lifestyle Brand
+// KFK (KUN FAYA KUN) - Site Metadata Configuration
 export const metadata: Metadata = {
   title: {
-    default: "KFK - KUN FAYA KUN | The Lifestyle Brand & Mode Masculine",
-    template: "%s | KFK",
+    default: siteConfig.seo.defaultTitle,
+    template: siteConfig.seo.titleTemplate,
   },
-  description:
-    "Découvrez KFK (KUN FAYA KUN), la marque de lifestyle masculin haut de gamme. Djalabiyas, accessoires, parfums et looks complets. Command Your Destiny.",
-  keywords: [
-    "KFK",
-    "Kun Faya Kun",
-    "Mode masculine haut de gamme",
-    "Djalabiya moderne",
-    "Lifestyle brand",
-    "Accessoires homme",
-    "Parfum homme",
-    "Style et élégance",
-  ],
-  authors: [{ name: "KFK" }],
-  creator: "KFK",
-  publisher: "KFK",
+  description: siteConfig.seo.defaultDescription,
+  keywords: [...siteConfig.seo.keywords],
+  authors: [...siteConfig.seo.authors],
+  creator: siteConfig.seo.creator,
+  publisher: siteConfig.seo.publisher,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://kunfayakun.com"), // À adapter selon votre domaine final
+  metadataBase: siteConfig.metadataBase,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "KFK - KUN FAYA KUN | The Lifestyle Brand",
-    description:
-      "Plus qu'une marque, un style de vie. Explorez nos collections de djalabiyas, accessoires et looks complets.",
-    url: "https://kunfayakun.com",
-    siteName: "KFK",
+    title: siteConfig.seo.defaultTitle,
+    description: siteConfig.seo.defaultDescription,
+    url: siteConfig.url,
+    siteName: siteConfig.brand.shortName,
     images: [
       {
         url: "/img/logo.png",
-        width: 800,
-        height: 600,
-        alt: "KFK Logo",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.brand.name} - ${siteConfig.brand.baseline}`,
       },
     ],
-    locale: "fr_FR",
+    locale: siteConfig.seo.ogLocale,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KFK - KUN FAYA KUN | Command Your Destiny",
-    description:
-      "Exprimez votre personnalité, affirmez votre style et commandez votre destin.",
+    title: siteConfig.seo.defaultTitle,
+    description: siteConfig.seo.defaultDescription,
     images: ["/img/logo.png"],
+    creator: siteConfig.seo.twitterHandle,
   },
   robots: {
     index: true,

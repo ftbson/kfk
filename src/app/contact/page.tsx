@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { siteConfig } from "@/config/site";
+import { convertUsdToXof, formatPrice } from "@/lib/currency";
 
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -9,24 +11,29 @@ export default function ContactPage() {
 
   const faqs = [
     {
-      question: "Welches E-Bike passt zu meinem Alltag?",
+      question: "Quel département KFK me correspond ?",
       answer:
-        "Für den täglichen Stadtverkehr empfehlen wir ein VILLE-Modell. Für längere Touren ist ein VTC ideal, während ein VTT für anspruchsvolle Trails ausgelegt ist.",
+        "DJALABIYA HOUSE : Tenues traditionnelles modernes pour cérémonies et célébrations. ACCESSOIRES : Montres, lunettes, parfums, bijoux, sacs. LOOK & DRIP : Ensembles quotidiens, joggers, sneakers, chemises. SIGNATURE : Parfums exclusifs, éditions limitées, cadeaux personnalisés. PACKS : Looks complets sélectionnés (Gentleman, Friday, Drip, Executive).",
     },
     {
-      question: "Wie weit kann ich mit einer Akkuladung fahren?",
+      question: "Livrez-vous à l'international ?",
       answer:
-        "Die Reichweite hängt von Akku, Gelände, Unterstützungsstufe und Fahrergewicht ab. Die technischen Angaben zur Reichweite finden Sie auf der jeweiligen Produktseite.",
+        `Oui. Nous livrons en ${siteConfig.legal.shippingCountries.join(", ")}. Les frais et délais varient selon la région. Livraison offerte dès ${formatPrice(siteConfig.legal.shippingCostThreshold)} d'achat. Consultez notre page Livraison pour les détails.`,
     },
     {
-      question: "Kann ich ein E-Bike zurückgeben oder warten lassen?",
+      question: "Quelle est votre politique de retour ?",
       answer:
-        "Unser Team hilft Ihnen gern mit Informationen zu Service, Garantie und Rückgabe. Schreiben Sie uns über das Kontaktformular und nennen Sie Ihr Modell.",
+        `Vous disposez de ${siteConfig.legal.returnWindowDays} jours à compter de la livraison pour demander un retour. Articles non portés, étiquettes et emballage d'origine obligatoires. Certains articles (personnalisés, édition limitée, parfums ouverts) ne sont pas retournables. Contactez-nous à ${siteConfig.contact.email} pour initier un retour.`,
     },
     {
-      question: "Wie wird meine Bestellung bezahlt?",
+      question: "Comment fonctionne le service Personal Stylist ?",
       answer:
-        "Nach dem Absenden Ihrer Bestellung erhalten Sie die Bankverbindung und den Gesamtbetrag für die Überweisung direkt im Checkout.",
+        `Indiquez-nous votre budget et l'occasion. Nos stylistes composent votre look complet de la tête aux pieds depuis les collections KFK. Disponible pour les membres VIP Club et sur demande pour les commandes supérieures à ${formatPrice(convertUsdToXof(500))}.`,
+    },
+    {
+      question: "Quels modes de paiement acceptez-vous ?",
+      answer:
+        `Actuellement : Virement bancaire. Paiement par carte prochainement. Après validation, vous recevez les coordonnées bancaires et le montant total. Utilisez votre numéro de commande comme référence.`,
     },
   ];
 
@@ -56,15 +63,13 @@ export default function ContactPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Kontaktanfrage konnte nicht gesendet werden");
+        throw new Error("Failed to send message");
       }
 
       form.reset();
-      setFormMessage("Vielen Dank. Ihre Nachricht wurde gesendet.");
+      setFormMessage("Merci. Votre message a bien été envoyé.");
     } catch {
-      setFormMessage(
-        "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
-      );
+      setFormMessage("Le message n'a pas pu être envoyé. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -74,18 +79,17 @@ export default function ContactPage() {
     <main className="contact-section">
       <div className="contact-container">
         <header className="contact-heading">
-          <p className="storefront-eyebrow">KUN FAYA KUN SERVICE</p>
-          <h1>Wir sind für Sie da</h1>
+          <p className="storefront-eyebrow">{siteConfig.brand.name} SERVICE</p>
+          <h1>Nous Sommes Là Pour Vous</h1>
           <p>
-            Fragen zu unseren E-Bikes, einer Bestellung oder zum Service?
-            Schreiben Sie uns.
+            Une question sur nos collections, une commande ou nos services ? Écrivez-nous.
           </p>
         </header>
         <div className="contact-grid">
-          {/* SPALTE LINKS: FAQ */}
+          {/* LEFT COLUMN: FAQ */}
           <div className="faq-column">
-            <span className="section-subtitle">HILFE & INFORMATIONEN</span>
-            <h2 className="section-title">Häufig gestellte Fragen</h2>
+            <span className="section-subtitle">AIDE & INFORMATIONS</span>
+            <h2 className="section-title">Questions Fréquentes</h2>
 
             <div className="faq-accordion">
               {faqs.map((faq, index) => (
@@ -107,7 +111,7 @@ export default function ContactPage() {
                   <div
                     className="faq-answer-wrapper"
                     style={{
-                      maxHeight: openFaq === index ? "200px" : "0",
+                      maxHeight: openFaq === index ? "300px" : "0",
                       opacity: openFaq === index ? 1 : 0,
                     }}
                   >
@@ -118,22 +122,22 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* TRENNLINIE */}
+          {/* DIVIDER */}
           <div className="vertical-divider"></div>
 
-          {/* SPALTE RECHTS: FORMULAR */}
+          {/* RIGHT COLUMN: FORM */}
           <div className="form-column">
-            <span className="section-subtitle">KONTAKTIEREN SIE UNS</span>
-            <h2 className="section-title">Wie können wir Ihnen helfen?</h2>
+            <span className="section-subtitle">NOUS CONTACTER</span>
+            <h2 className="section-title">Comment Pouvons-nous Vous Aider ?</h2>
 
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="input-grid">
                 <label>
-                  Ihr Name *
+                  Votre Nom *
                   <input type="text" name="name" autoComplete="name" required />
                 </label>
                 <label>
-                  Ihre E-Mail-Adresse *
+                  Votre Email *
                   <input
                     type="email"
                     name="email"
@@ -142,17 +146,17 @@ export default function ContactPage() {
                   />
                 </label>
                 <label>
-                  Telefonnummer
+                  Numéro de Téléphone
                   <input type="tel" name="phone" autoComplete="tel" />
                 </label>
                 <label>
-                  Betreff
+                  Sujet
                   <input type="text" name="subject" />
                 </label>
               </div>
 
               <label className="contact-message-label">
-                Ihre Nachricht *
+                Votre Message *
                 <textarea name="message" rows={5} required />
               </label>
 
@@ -161,7 +165,8 @@ export default function ContactPage() {
                 className="btn-submit-contact"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "WIRD GESENDET..." : "FRAGE STELLEN"}
+                {isSubmitting ? "ENVOI EN COURS..." : "ENVOYER LE MESSAGE"}
+                {!isSubmitting && <i className="fa-solid fa-arrow-right" aria-hidden="true" />}
               </button>
               {formMessage && <p role="status">{formMessage}</p>}
             </form>

@@ -20,13 +20,13 @@ export default function ProductDetailActions({
   };
 
   return (
-    <div className="KUN FAYA KUN-detail-actions">
-      <button className="KUN FAYA KUN-detail-add-btn" onClick={handleAddToCart}>
+    <div className="kfk-detail-actions">
+      <button className="kfk-detail-add-btn" onClick={handleAddToCart}>
         <i className="fa-solid fa-cart-shopping" aria-hidden="true" />
-        In den Warenkorb
+        Ajouter au panier
       </button>
       <button
-        className="KUN FAYA KUN-detail-favorite-btn"
+        className="kfk-detail-favorite-btn"
         onClick={() => toggleFavorite(product.id)}
         aria-pressed={favorite}
       >
@@ -34,12 +34,12 @@ export default function ProductDetailActions({
           className={favorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}
           aria-hidden="true"
         />
-        {favorite ? "Aus Wunschliste entfernen" : "Zur Wunschliste"}
+        {favorite ? "Retirer des favoris" : "Ajouter aux favoris"}
       </button>
       {added && (
         <p className="product-added-message" role="status">
-          Zum Warenkorb hinzugefügt.{" "}
-          <Link href="/panier">Warenkorb ansehen</Link>
+          Article ajouté au panier.{" "}
+          <Link href="/cart">Voir le panier</Link>
         </p>
       )}
     </div>

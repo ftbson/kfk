@@ -18,10 +18,10 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> },
 ) {
   if (!isSameOriginRequest(request)) {
-    return NextResponse.json({ error: "Ungültige Anfrage." }, { status: 403 });
+    return NextResponse.json({ error: "Invalid request." }, { status: 403 });
   }
   if (!(await isAdminAuthenticated())) {
-    return NextResponse.json({ error: "Accès non autorisé." }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized access." }, { status: 401 });
   }
 
   try {
@@ -31,7 +31,7 @@ export async function PATCH(
         ? body.status
         : null;
     if (!isOrderStatus(status)) {
-      return NextResponse.json({ error: "Ungültiger Bestellstatus." }, { status: 400 });
+      return NextResponse.json({ error: "Invalid order status." }, { status: 400 });
     }
 
     const { id } = await params;
@@ -41,14 +41,14 @@ export async function PATCH(
       .where(eq(orders.id, id));
 
     if (result.rowsAffected === 0) {
-      return NextResponse.json({ error: "Bestellung nicht gefunden." }, { status: 404 });
+      return NextResponse.json({ error: "Order not found." }, { status: 404 });
     }
 
     return NextResponse.json({ success: true, id, status });
   } catch (error) {
-    console.error("Erreur lors de la mise à jour du statut de commande :", error);
+    console.error("Error updating order status:", error);
     return NextResponse.json(
-      { error: "Der Bestellstatus konnte nicht aktualisiert werden." },
+      { error: "Order status could not be updated." },
       { status: 500 },
     );
   }

@@ -1,9 +1,9 @@
 import ShopGrid from "@/components/ShopGrid";
 
 export const metadata = {
-  title: "E-Bikes | KUN FAYA KUN",
+  title: "Boutique KFK | KUN FAYA KUN",
   description:
-    "Entdecken Sie unsere E-Bikes für Stadt, Trekking und anspruchsvolle Trails.",
+    "Découvrez nos collections lifestyle premium : DJALABIYA HOUSE, ACCESSOIRES, LOOK & DRIP, SIGNATURE. Mode, parfums, accessoires et packs complets pour homme.",
 };
 
 export default function BoutiquePage() {

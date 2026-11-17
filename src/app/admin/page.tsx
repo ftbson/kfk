@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { formatPrice } from "@/lib/currency";
 import "./admin.css";
 
 interface Order {
@@ -113,10 +114,10 @@ export default function AdminPage() {
         loadBankDetails();
       } else {
         const data = await res.json();
-        setLoginError(data.error || "Anmeldung fehlgeschlagen");
+        setLoginError(data.error || "La connexion a échoué");
       }
     } catch {
-      setLoginError("Ein Fehler ist aufgetreten.");
+      setLoginError("Une erreur est survenue.");
     }
   };
 
@@ -131,15 +132,15 @@ export default function AdminPage() {
       const res = await fetch("/api/orders");
       const data: unknown = await res.json();
       if (!res.ok || !Array.isArray(data) || !data.every(isAdminOrder)) {
-        throw new Error("Bestellungen konnten nicht geladen werden.");
+        throw new Error("Les commandes n'ont pas pu être chargées.");
       }
       setOrders(data);
     } catch (err) {
-      console.error("Fehler beim Laden der Bestellungen:", err);
+      console.error("Error loading orders:", err);
       setOrderStatusError(
         err instanceof Error
           ? err.message
-          : "Bestellungen konnten nicht geladen werden.",
+          : "Les commandes n'ont pas pu être chargées.",
       );
     } finally {
       setLoadingOrders(false);
@@ -163,7 +164,7 @@ export default function AdminPage() {
       if (!response.ok) {
         const data = await response.json();
         throw new Error(
-          data.error || "Bestellstatus konnte nicht gespeichert werden.",
+          data.error || "Le statut de la commande n'a pas pu être enregistré.",
         );
       }
       setOrders((previous) =>
@@ -172,11 +173,11 @@ export default function AdminPage() {
         ),
       );
     } catch (error) {
-      console.error("Fehler beim Aktualisieren des Bestellstatus:", error);
+      console.error("Error updating order status:", error);
       setOrderStatusError(
         error instanceof Error
           ? error.message
-          : "Bestellstatus konnte nicht gespeichert werden.",
+          : "Le statut de la commande n'a pas pu être enregistré.",
       );
     }
   };
@@ -189,7 +190,7 @@ export default function AdminPage() {
       const data = await res.json();
       if (!res.ok) {
         throw new Error(
-          data.error || "Bankdaten konnten nicht geladen werden.",
+          data.error || "Les coordonnées bancaires n'ont pas pu être chargées.",
         );
       }
 
@@ -199,10 +200,10 @@ export default function AdminPage() {
           : emptyBankDetails,
       );
     } catch (error) {
-      console.error("Fehler beim Laden der Bankdaten:", error);
+      console.error("Error loading bank details:", error);
       setBankDetailsStatus({
         type: "error",
-        message: "Bankverbindung konnte nicht geladen werden.",
+        message: "Les coordonnées bancaires n'ont pas pu être chargées.",
       });
     } finally {
       setLoadingBankDetails(false);
@@ -255,22 +256,22 @@ export default function AdminPage() {
       const data = await res.json();
       if (!res.ok) {
         throw new Error(
-          data.error || "Bankdaten konnten nicht gespeichert werden.",
+          data.error || "Les coordonnées bancaires n'ont pas pu être enregistrées.",
         );
       }
 
       setBankDetailsStatus({
         type: "success",
-        message: "Bankverbindung erfolgreich aktualisiert.",
+        message: "Coordonnées bancaires mises à jour avec succès.",
       });
     } catch (error) {
-      console.error("Fehler beim Speichern der Bankdaten:", error);
+      console.error("Error saving bank details:", error);
       setBankDetailsStatus({
         type: "error",
         message:
           error instanceof Error
             ? error.message
-            : "Bankverbindung konnte nicht gespeichert werden.",
+            : "Les coordonnées bancaires n'ont pas pu être enregistrées.",
       });
     } finally {
       setSavingBankDetails(false);
@@ -280,27 +281,27 @@ export default function AdminPage() {
   if (isAuthenticated === null) {
     return (
       <div className="admin-loading">
-        <p>Laden...</p>
+        <p>Chargement…</p>
       </div>
     );
   }
 
-  // ÉCRAN DE CONNEXION
+  // LOGIN SCREEN
   if (!isAuthenticated) {
     return (
       <main className="admin-login-wrapper">
         <div className="admin-login-card">
           <div className="admin-login-header">
             <i className="fa-solid fa-lock admin-login-icon"></i>
-            <h1 className="admin-login-title">Admin Login</h1>
-            <p className="admin-login-subtitle">KUN FAYA KUN Administration</p>
+            <h1 className="admin-login-title">Connexion Admin</h1>
+            <p className="admin-login-subtitle">Administration KFK</p>
           </div>
 
           {loginError && <div className="admin-login-error">{loginError}</div>}
 
           <form onSubmit={handleLogin} className="admin-login-form">
             <div className="admin-form-group">
-              <label htmlFor="username">Benutzername</label>
+              <label htmlFor="username">Nom d'utilisateur</label>
               <input
                 id="username"
                 type="text"
@@ -312,7 +313,7 @@ export default function AdminPage() {
             </div>
 
             <div className="admin-form-group">
-              <label htmlFor="password">Passwort</label>
+              <label htmlFor="password">Mot de passe</label>
               <input
                 id="password"
                 type="password"
@@ -324,7 +325,7 @@ export default function AdminPage() {
             </div>
 
             <button type="submit" className="admin-btn-primary">
-              Anmelden
+              Se Connecter
             </button>
           </form>
         </div>
@@ -332,19 +333,19 @@ export default function AdminPage() {
     );
   }
 
-  // DASHBOARD ADMIN
+  // ADMIN DASHBOARD
   return (
     <main className="admin-container">
       <div className="admin-header">
         <div>
-          <h1 className="admin-header-title">Bestellungen (Commandes)</h1>
+          <h1 className="admin-header-title">Commandes</h1>
           <p className="admin-header-desc">
-            Übersicht aller eingegangenen Kundenbestellungen
+            Aperçu de toutes les commandes clients reçues
           </p>
         </div>
 
         <button onClick={handleLogout} className="admin-btn-logout">
-          <i className="fa-solid fa-right-from-bracket"></i> Abmelden
+          <i className="fa-solid fa-right-from-bracket"></i> Se Déconnecter
         </button>
       </div>
 
@@ -353,12 +354,11 @@ export default function AdminPage() {
         aria-labelledby="bank-details-heading"
       >
         <h2 id="bank-details-heading" className="admin-bank-title">
-          <i className="fa-solid fa-building-columns"></i> Bankverbindung
-          konfigurieren
+          <i className="fa-solid fa-building-columns"></i> Configurer les Coordonnées Bancaires
         </h2>
         <form className="admin-bank-form" onSubmit={handleBankDetailsSave}>
           <div className="admin-bank-field">
-            <label htmlFor="bank-beneficiary">Kontoinhaber *</label>
+            <label htmlFor="bank-beneficiary">Titulaire du compte *</label>
             <input
               id="bank-beneficiary"
               name="beneficiary"
@@ -397,7 +397,7 @@ export default function AdminPage() {
             />
           </div>
           <div className="admin-bank-field">
-            <label htmlFor="bank-address">Bankadresse (optional)</label>
+            <label htmlFor="bank-address">Adresse de la banque (optionnel)</label>
             <input
               id="bank-address"
               name="address"
@@ -414,10 +414,10 @@ export default function AdminPage() {
             disabled={loadingBankDetails || savingBankDetails}
           >
             {loadingBankDetails
-              ? "Bankdaten werden geladen..."
+              ? "Chargement des coordonnées bancaires…"
               : savingBankDetails
-                ? "Wird gespeichert..."
-                : "Bankverbindung aktualisieren"}
+                ? "Enregistrement…"
+                : "Mettre à jour les coordonnées bancaires"}
           </button>
         </form>
         {bankDetailsStatus && (
@@ -436,22 +436,22 @@ export default function AdminPage() {
         </p>
       )}
       {loadingOrders ? (
-        <p className="admin-loading">Bestellungen werden geladen...</p>
+        <p className="admin-loading">Chargement des commandes…</p>
       ) : orders.length === 0 ? (
-        <div className="admin-empty-state">Keine Bestellungen vorhanden.</div>
+        <div className="admin-empty-state">Aucune commande trouvée.</div>
       ) : (
         <div className="admin-table-wrapper">
           <table className="admin-table">
             <thead>
               <tr>
-                <th>Bestell-ID</th>
-                <th>Kunde</th>
-                <th>Lieferadresse</th>
-                <th>Kontakt</th>
-                <th>Gesamtsumme</th>
-                <th>Datum</th>
-                <th>Produkte</th>
-                <th>Status</th>
+                <th>ID Commande</th>
+                <th>Client</th>
+                <th>Adresse de Livraison</th>
+                <th>Contact</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Produits</th>
+                <th>Statut</th>
               </tr>
             </thead>
             <tbody>
@@ -478,12 +478,14 @@ export default function AdminPage() {
                     <br />
                     <span className="admin-customer-sub">{order.email}</span>
                   </td>
-                  <td className="admin-price">
-                    CHF {order.grandTotal.toFixed(2)}
-                  </td>
+                  <td className="admin-price">{formatPrice(order.grandTotal)}</td>
                   <td>
                     {order.createdAt
-                      ? new Date(order.createdAt).toLocaleDateString("de-CH")
+                      ? new Date(order.createdAt).toLocaleDateString("fr-FR", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
                       : "—"}
                   </td>
                   <td>
@@ -497,7 +499,7 @@ export default function AdminPage() {
                   </td>
                   <td>
                     <select
-                      aria-label={`Status ${order.id}`}
+                      aria-label={`Statut ${order.id}`}
                       className="admin-order-status-select"
                       value={order.status ?? "pending"}
                       onChange={(event) =>
@@ -508,9 +510,9 @@ export default function AdminPage() {
                       }
                     >
                       <option value="pending">En attente</option>
-                      <option value="paid">Payée</option>
-                      <option value="shipped">Expédiée</option>
-                      <option value="cancelled">Annulée</option>
+                      <option value="paid">Payé</option>
+                      <option value="shipped">Expédié</option>
+                      <option value="cancelled">Annulé</option>
                     </select>
                   </td>
                 </tr>

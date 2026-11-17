@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 interface Slide {
   id: number;
@@ -15,48 +16,38 @@ interface Slide {
   bgColor: string;
 }
 
-const heroSlides: Slide[] = [
-  {
-    id: 1,
-    title: "DJALABIYA HOUSE",
-    subtitle: "Tradition & Élégance. L'art du boubou moderne revisité.",
-    category: "01. TRADITION",
-    imageLeft: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop", // Remplaçable par vos assets
-    imageRight: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format&fit=crop",
-    ctaText: "Découvrir la collection",
-    ctaLink: "/djalabiya-house",
-    bgColor: "#0f0f0f",
-  },
-  {
-    id: 2,
-    title: "LOOK & DRIP",
-    subtitle: "Ensembles, joggings et style urbain maîtrisé.",
-    category: "02. STREETWEAR",
-    imageLeft: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop",
-    imageRight: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop",
-    ctaText: "Voir les outfits",
-    ctaLink: "/look-and-drip",
-    bgColor: "#141414",
-  },
-  {
-    id: 3,
-    title: "SIGNATURE & ACCESSOIRES",
-    subtitle: "Parfums exclusifs, montres et éditions limitées KFK.",
-    category: "03. LUXURY",
-    imageLeft: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop",
-    imageRight: "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=1000&auto=format&fit=crop",
-    ctaText: "Explorer le luxe",
-    ctaLink: "/signature",
-    bgColor: "#0d0d0d",
-  },
-];
+// Hero slides driven by siteConfig departments (first 4 departments)
+const heroSlides: Slide[] = siteConfig.departments.slice(0, 4).map((dept, idx) => ({
+  id: idx + 1,
+  title: dept.hero.title,
+  subtitle: dept.hero.subtitle,
+  category: dept.hero.category,
+  // TODO: Replace with actual KFK assets in /public/img/hero/
+  imageLeft: dept.id === "djalabiya-house"
+    ? "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop"
+    : dept.id === "accessories"
+    ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop"
+    : dept.id === "look-and-drip"
+    ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop"
+    : "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=1000&auto=format&fit=crop",
+  imageRight: dept.id === "djalabiya-house"
+    ? "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format&fit=crop"
+    : dept.id === "accessories"
+    ? "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=1000&auto=format&fit=crop"
+    : dept.id === "look-and-drip"
+    ? "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop"
+    : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop",
+  ctaText: dept.hero.ctaText,
+  ctaLink: dept.hero.ctaLink,
+  bgColor: idx === 0 ? "#0f0f0f" : idx === 1 ? "#141414" : idx === 2 ? "#0d0d0d" : "#111111",
+}));
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Effet de reveal au chargement initial de la page
+  // Reveal effect on initial page load
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
@@ -64,7 +55,7 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Défilement automatique des slides (tous les 6 secondes)
+  // Auto-advance slides every 6 seconds
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -76,35 +67,38 @@ export default function Hero() {
   const slide = heroSlides[currentSlide];
 
   return (
-    <section 
+    <section
       className={`kfk-hero-section ${isLoaded ? "reveal-loaded" : ""}`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      aria-label="Carrousel hero KFK"
     >
-      {/* Conteneur principal en Split-Screen inspiré des visuels */}
+      {/* Main Split-Screen Container */}
       <div className="hero-split-container">
-        
-        {/* Partie Gauche du Split */}
+
+        {/* Left Side of Split */}
         <div className="hero-side hero-side-left">
-          <div 
-            className="hero-bg-image" 
+          <div
+            className="hero-bg-image"
             style={{ backgroundImage: `url(${slide.imageLeft})` }}
+            aria-hidden="true"
           >
             <div className="hero-overlay-gradient"></div>
           </div>
         </div>
 
-        {/* Partie Droite du Split */}
+        {/* Right Side of Split */}
         <div className="hero-side hero-side-right">
-          <div 
-            className="hero-bg-image" 
+          <div
+            className="hero-bg-image"
             style={{ backgroundImage: `url(${slide.imageRight})` }}
+            aria-hidden="true"
           >
             <div className="hero-overlay-gradient"></div>
           </div>
         </div>
 
-        {/* Contenu Central Flottant (Titres, Slogan, CTA) */}
+        {/* Floating Central Content (Titles, Slogan, CTA) */}
         <div className="hero-content-overlay">
           <div className="hero-tag-wrapper">
             <span className="hero-category-tag">{slide.category}</span>
@@ -121,38 +115,40 @@ export default function Hero() {
           <div className="hero-cta-wrapper">
             <Link href={slide.ctaLink} className="hero-cta-btn">
               <span>{slide.ctaText}</span>
-              <i className="fa-solid fa-arrow-right"></i>
+              <i className="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </Link>
           </div>
         </div>
 
-        {/* Contrôles de navigation et indicateurs de défilement (en bas à droite) */}
+        {/* Navigation Controls & Indicators (Bottom Right) */}
         <div className="hero-indicators-bar">
-          <button 
+          <button
             className="hero-nav-arrow"
             onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
-            aria-label="Slide précédente"
+            aria-label="Diapositive précédente"
           >
-            <i className="fa-solid fa-chevron-left"></i>
+            <i className="fa-solid fa-chevron-left" aria-hidden="true"></i>
           </button>
 
-          <div className="hero-dots">
+          <div className="hero-dots" role="tablist" aria-label="Indicateurs de diapositives">
             {heroSlides.map((s, idx) => (
               <button
                 key={s.id}
                 className={`hero-dot ${idx === currentSlide ? "active" : ""}`}
                 onClick={() => setCurrentSlide(idx)}
-                aria-label={`Aller au slide ${idx + 1}`}
+                role="tab"
+                aria-selected={idx === currentSlide}
+                aria-label={`Aller à la diapositive ${idx + 1}: ${s.title}`}
               ></button>
             ))}
           </div>
 
-          <button 
+          <button
             className="hero-nav-arrow"
             onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
-            aria-label="Slide suivante"
+            aria-label="Diapositive suivante"
           >
-            <i className="fa-solid fa-chevron-right"></i>
+            <i className="fa-solid fa-chevron-right" aria-hidden="true"></i>
           </button>
         </div>
 

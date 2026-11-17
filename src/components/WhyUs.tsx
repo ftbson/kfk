@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { siteConfig } from "@/config/site";
 
 interface Feature {
   icon: string;
-  title: string; 
+  title: string;
   description: string;
   active?: boolean;
 }
@@ -12,24 +13,24 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: "fa-solid fa-truck-fast",
-    title: "Schnelle Lieferung",
-    description: "Lieferung nach Hause innerhalb von 24 bis 72 Stunden in der ganzen Schweiz.",
+    title: "Livraison Internationale",
+    description: "Livraison au Bénin, en Afrique et à l'international. Où que vous soyez, KFK vous rejoint.",
     active: true,
   },
   {
     icon: "fa-solid fa-award",
-    title: "Höchste Qualität",
-    description: "Schweizer Holz, ofengetrocknet und zertifiziert.",
+    title: "Qualité Premium",
+    description: "Tissus sélectionnés, mouvements suisses, cuir italien, parfums signature. Aucun compromis.",
   },
   {
     icon: "fa-solid fa-shield-halved",
-    title: "Sichere Zahlung",
-    description: "TWINT, Kreditkarte oder Kauf auf Rechnung – vollständig verschlüsselt.",
+    title: "Paiement Sécurisé",
+    description: "Virement bancaire et paiement par carte (bientôt). Entièrement chiffré, zéro risque.",
   },
   {
     icon: "fa-solid fa-headset",
-    title: "Kundenservice",
-    description: "Persönliche Beratung steht Ihnen von Montag bis Samstag zur Verfügung.",
+    title: "Service Personnel",
+    description: "KFK Personal Stylist : donnez budget + occasion, nous composons votre look complet. Support VIP prioritaire.",
   },
 ];
 
@@ -41,18 +42,18 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { id: "clients", target: 15000, suffix: "+", label: "ZUFRIEDENE KUNDEN" },
-  { id: "steres", target: 25000, suffix: "", label: "GELIEFERTE STER" },
-  { id: "experience", target: 12, suffix: "", label: "JAHRE ERFAHRUNG" },
-  { id: "cantons", target: 26, suffix: "", label: "BELIEFERTE KANTONE" },
+  { id: "clients", target: 5000, suffix: "+", label: "CLIENTS SATISFAITS" },
+  { id: "orders", target: 12000, suffix: "+", label: "COMMANDES EXPÉDIÉES" },
+  { id: "countries", target: 25, suffix: "+", label: "PAYS DESSERVIS" },
+  { id: "collections", target: 12, suffix: "", label: "COLLECTIONS EXCLUSIVES" },
 ];
 
 export default function WhyUs() {
   const [counts, setCounts] = useState<{ [key: string]: number }>({
     clients: 0,
-    steres: 0,
-    experience: 0,
-    cantons: 0,
+    orders: 0,
+    countries: 0,
+    collections: 0,
   });
   const [hasAnimated, setHasAnimated] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -65,7 +66,7 @@ export default function WhyUs() {
           animateStats();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (sectionRef.current) {
@@ -86,46 +87,44 @@ export default function WhyUs() {
       const progress = step / steps;
 
       setCounts({
-        clients: Math.floor(progress * 15000),
-        steres: Math.floor(progress * 25000),
-        experience: Math.floor(progress * 12),
-        cantons: Math.floor(progress * 26),
+        clients: Math.floor(progress * 5000),
+        orders: Math.floor(progress * 12000),
+        countries: Math.floor(progress * 25),
+        collections: Math.floor(progress * 12),
       });
 
       if (step >= steps) {
         clearInterval(timer);
         setCounts({
-          clients: 15000,
-          steres: 25000,
-          experience: 12,
-          cantons: 26,
+          clients: 5000,
+          orders: 12000,
+          countries: 25,
+          collections: 12,
         });
       }
     }, intervalTime);
   };
 
   return (
-    <section className="whyus-section" ref={sectionRef}>
+    <section className="whyus-section" ref={sectionRef} aria-labelledby="whyus-title">
       <div className="whyus-container">
         {/* Header */}
         <div className="whyus-header">
-          <h2 className="whyus-title">Warum SwissHolz</h2>
+          <h2 id="whyus-title" className="whyus-title">Pourquoi KFK</h2>
           <p className="whyus-subtitle">
-            Vier Versprechen, auf die Sie sich verlassen können.
+            Quatre promesses. Une marque lifestyle.
           </p>
           <div className="whyus-line"></div>
         </div>
 
-        {/* Vorteils-Raster */}
+        {/* Features Grid */}
         <div className="features-grid">
           {features.map((feature, idx) => (
             <div key={idx} className="feature-card">
               <div
-                className={`feature-icon-wrap ${
-                  feature.active ? "active" : ""
-                }`}
+                className={`feature-icon-wrap ${feature.active ? "active" : ""}`}
               >
-                <i className={feature.icon}></i>
+                <i className={feature.icon} aria-hidden="true"></i>
               </div>
               <h3 className="feature-card-title">{feature.title}</h3>
               <p className="feature-card-desc">{feature.description}</p>
@@ -133,12 +132,12 @@ export default function WhyUs() {
           ))}
         </div>
 
-        {/* Dynamischer Statistik-Banner */}
-        <div className="stats-banner">
+        {/* Animated Stats Banner */}
+        <div className="stats-banner" aria-label="Statistiques KFK">
           {stats.map((stat) => (
             <div key={stat.id} className="stat-item">
               <div className="stat-number">
-                {counts[stat.id].toLocaleString("de-CH")}
+                {counts[stat.id].toLocaleString("fr-FR")}
                 {stat.suffix}
               </div>
               <div className="stat-label">{stat.label}</div>

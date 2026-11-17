@@ -2,9 +2,9 @@ import CategorySection from "@/components/Categories";
 import Link from "next/link";
 
 export const metadata = {
-  title: "E-Bike Kategorien | KUN FAYA KUN",
+  title: "Départements KFK | KUN FAYA KUN",
   description:
-    "Finden Sie das passende KUN FAYA KUN E-Bike für Stadt, Trekking oder Gelände.",
+    "Découvrez les quatre mondes KFK : DJALABIYA HOUSE, ACCESSOIRES, LOOK & DRIP, SIGNATURE. Mode, parfums, accessoires et looks complets pour homme.",
 };
 
 export default function CategoriesPage() {
@@ -12,8 +12,8 @@ export default function CategoriesPage() {
     <main className="category-index-page">
       <CategorySection />
       <div className="storefront-actions category-index-action">
-        <Link href="/products" className="storefront-primary-link">
-          Alle E-Bikes ansehen
+        <Link href="/packs" className="storefront-primary-link">
+          Voir Tous Les Packs
           <i className="fa-solid fa-arrow-right" aria-hidden="true" />
         </Link>
       </div>

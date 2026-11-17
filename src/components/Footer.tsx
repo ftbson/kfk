@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -16,86 +17,82 @@ export default function Footer() {
     }
   };
 
+  const { footer, brand, contact } = siteConfig;
+
   return (
-    <footer className="kfk-footer">
+    <footer className="kfk-footer" role="contentinfo">
       <div className="kfk-footer-container">
-        
-        {/* SECTION HAUTE : NEWSLETTER & INFOS IMPORTANTES */}
+
+        {/* TOP SECTION: NEWSLETTER & QUICK LINKS */}
         <div className="kfk-footer-top">
-          
-          {/* Bloc Newsletter */}
+
+          {/* Newsletter Block */}
           <div className="footer-newsletter">
             <h3>REJOIGNEZ L'UNIVERS KFK</h3>
-            <p>Abonnez-vous pour ne manquer aucune info sur nos drops, releases et exclusivités.</p>
-            
-            <form onSubmit={handleSubscribe} className="newsletter-form">
-              <input 
-                type="email" 
-                placeholder="Votre adresse e-mail" 
+            <p>Inscrivez-vous pour ne manquer aucune sortie, lancement ou exclusivité.</p>
+
+            <form onSubmit={handleSubscribe} className="newsletter-form" aria-label="Inscription newsletter">
+              <input
+                type="email"
+                placeholder="Votre adresse email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required 
+                required
+                aria-label="Adresse email pour la newsletter"
               />
               <button type="submit" className="subscribe-btn">
                 S'INSCRIRE
               </button>
             </form>
             {subscribed && (
-              <span className="success-msg">Merci pour votre inscription au KFK Club.</span>
+              <span className="success-msg" role="status">Merci d'avoir rejoint le KFK Club.</span>
             )}
           </div>
 
-          {/* Liens Rapides : Service Client */}
-          <div className="footer-links-col">
-            <h4>Service Client</h4>
-            <ul>
-              <li><Link href="/contact">Nous contacter</Link></li>
-              <li><Link href="/faq">FAQ</Link></li>
-              <li><Link href="/shipping">Livraison</Link></li>
-              <li><Link href="/returns">Demande de retour</Link></li>
-            </ul>
-          </div>
-
-          {/* Liens Rapides : Informations & Légal */}
-          <div className="footer-links-col">
-            <h4>Informations</h4>
-            <ul>
-              <li><Link href="/about">À propos</Link></li>
-              <li><Link href="/cgv">CGV</Link></li>
-              <li><Link href="/privacy">Politique de confidentialité</Link></li>
-              <li><Link href="/legal">Mentions légales</Link></li>
-            </ul>
-          </div>
-
-          {/* Réseaux Sociaux */}
-          <div className="footer-links-col">
-            <h4>Suivez-nous</h4>
-            <div className="footer-socials">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <i className="fa-brands fa-instagram"></i> Instagram
-              </a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                <i className="fa-brands fa-tiktok"></i> TikTok
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <i className="fa-brands fa-facebook-f"></i> Facebook
-              </a>
+          {/* Footer Columns from config */}
+          {footer.columns.map((col, idx) => (
+            <div key={idx} className="footer-links-col">
+              <h4>{col.title}</h4>
+              {('links' in col && col.links) && (
+                <ul>
+                  {col.links.map((link, i) => (
+                    <li key={i}><Link href={link.href}>{link.label}</Link></li>
+                  ))}
+                </ul>
+              )}
+              {('socials' in col && col.socials) && (
+                <div className="footer-socials">
+                  {col.socials.map((social, i) => (
+                    <a
+                      key={i}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                    >
+                      <i className={`fa-brands fa-${social.icon}`} aria-hidden="true"></i>
+                      <span>{social.label}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          ))}
 
         </div>
 
-        {/* SECTION BASSE : EFFET TYPO GIGANTESQUE EN BAS (Style Minimaliste Luxe) */}
+        {/* BOTTOM SECTION: BRAND TYPOGRAPHY + COPYRIGHT */}
         <div className="kfk-footer-bottom-brand">
           <div className="giant-logo-text">
-            <span>KUN FAYA KUN</span>
+            <span>{brand.name}</span>
           </div>
-          
+
           <div className="footer-sub-bar">
-            <p>© {new Date().getFullYear()} KFK — COMMAND YOUR DESTINY. Tous droits réservés.</p>
+            <p>{footer.copyright}</p>
             <div className="footer-sub-links">
-              <Link href="/privacy">Confidentialité</Link>
-              <Link href="/terms">Termes</Link>
+              {footer.bottomLinks.map((link, i) => (
+                <Link key={i} href={link.href}>{link.label}</Link>
+              ))}
             </div>
           </div>
         </div>

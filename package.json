@@ -1,12 +1,17 @@
 {
-  "name": "SWISSHOLZ",
-  "version": "0.1.0",
+  "name": "kfk",
+  "version": "1.0.0",
   "private": true,
+  "description": "KFK (KUN FAYA KUN) — Premium Men's Lifestyle Brand. The Lifestyle Brand. Command Your Destiny.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",

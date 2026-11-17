@@ -1,63 +1,70 @@
 import type { Metadata } from "next";
 import LegalDocument from "@/components/LegalDocument";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Impressum",
-  description: "Anbieter- und Kontaktangaben von KUN FAYA KUN.",
+  title: "Mentions Légales",
+  description: "Identification et coordonnées du fournisseur pour KFK (KUN FAYA KUN).",
 };
 
-export default function ImpressumPage() {
+export default function LegalNoticePage() {
+  const { legal, contact, brand } = siteConfig;
+
   return (
     <LegalDocument
-      title="Impressum"
-      description="Angaben zum Anbieter und Kontaktmöglichkeiten."
+      title="Mentions Légales"
+      description="Informations sur le fournisseur et coordonnées de contact."
     >
       <section className="legal-section">
-        <h2>Anbieter</h2>
+        <h2>Éditeur</h2>
         <p>
-          <strong>[VOLLSTÄNDIGER RECHTLICHER UNTERNEHMENSNAME]</strong>
+          <strong>{legal.companyName}</strong>
           <br />
-          [RECHTSFORM, falls zutreffend]
+          {legal.companyLegalForm}
           <br />
-          [STRASSE UND HAUSNUMMER]
+          {legal.companyAddress}
           <br />
-          [PLZ UND ORT]
-          <br />
-          [LAND]
+          {legal.companyCountry}
         </p>
       </section>
 
       <section className="legal-section">
-        <h2>Vertretungsberechtigte Person</h2>
-        <p>[VOR- UND NACHNAME, falls für die Rechtsform erforderlich]</p>
+        <h2>Représentant Légal</h2>
+        <p>{legal.authorizedRepresentative}</p>
       </section>
 
       <section className="legal-section">
-        <h2>Kontakt</h2>
+        <h2>Contact</h2>
         <p>
-          E-Mail: <strong>[ÖFFENTLICHE KONTAKT-E-MAIL]</strong>
+          Email : <strong>{contact.email}</strong>
           <br />
-          Telefon: <strong>[TELEFONNUMMER, falls angeboten]</strong>
+          Téléphone : <strong>{contact.phone}</strong>
         </p>
       </section>
 
       <section className="legal-section">
-        <h2>Unternehmensangaben</h2>
+        <h2>Informations Société</h2>
         <p>
-          Handelsregister / UID:{" "}
-          <strong>[ANGABE ODER «NICHT ZUTREFFEND»]</strong>
+          Numéro d'immatriculation : <strong>{legal.registrationNumber}</strong>
           <br />
-          Mehrwertsteuernummer:{" "}
-          <strong>[ANGABE ODER «NICHT MWST-PFLICHTIG»]</strong>
+          Numéro TVA : <strong>{legal.vatNumber}</strong>
         </p>
       </section>
 
       <section className="legal-section">
-        <h2>Verantwortlich für den Inhalt</h2>
+        <h2>Responsable de la Publication</h2>
         <p>
-          <strong>[NAME UND POSTANSCHRIFT DER VERANTWORTLICHEN PERSON]</strong>
+          <strong>{legal.authorizedRepresentative}</strong>
         </p>
       </section>
+
+      <aside className="legal-draft-notice" role="note">
+        <strong>Brouillon — À Compléter Avant Publication</strong>
+        <p>
+          Tous les placeholders doivent être remplacés par les informations réelles de l'entreprise.
+          Ce texte ne constitue pas un avis juridique. Consultez un avocat qualifié dans votre juridiction.
+        </p>
+      </aside>
     </LegalDocument>
   );
 }

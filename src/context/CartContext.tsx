@@ -7,6 +7,7 @@ import {
   useEffect,
   ReactNode,
 } from "react";
+import { getProductById } from "@/data/products";
 
 export interface CartItem {
   id: string;
@@ -62,12 +63,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const frameId = requestAnimationFrame(() => {
       try {
-        const savedCart = localStorage.getItem("swissholz_cart");
-        const savedFavorites = localStorage.getItem("KUN FAYA KUN_favorites");
+        const savedCart = localStorage.getItem("kfk_cart");
+        const savedFavorites = localStorage.getItem("kfk_favorites");
         if (savedCart) {
           const parsedCart: unknown = JSON.parse(savedCart);
           if (Array.isArray(parsedCart)) {
-            setCart(parsedCart.filter(isCartItem));
+            setCart(
+              parsedCart
+                .filter(isCartItem)
+                .flatMap((item) => {
+                  const product = getProductById(item.id);
+                  return product
+                    ? [
+                        {
+                          ...item,
+                          title: product.title,
+                          category: product.category,
+                          price: product.price,
+                          oldPrice: product.oldPrice,
+                          image: product.image,
+                        },
+                      ]
+                    : [];
+                }),
+            );
           }
         }
         if (savedFavorites) {
@@ -80,7 +99,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           }
         }
       } catch (error) {
-        console.error("Fehler beim Laden gespeicherter Shop-Daten:", error);
+        console.error("Error loading saved shop data:", error);
       } finally {
         setIsHydrated(true);
       }
@@ -93,10 +112,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (!isHydrated) return;
 
     try {
-      localStorage.setItem("swissholz_cart", JSON.stringify(cart));
-      localStorage.setItem("KUN FAYA KUN_favorites", JSON.stringify(favorites));
+      localStorage.setItem("kfk_cart", JSON.stringify(cart));
+      localStorage.setItem("kfk_favorites", JSON.stringify(favorites));
     } catch (error) {
-      console.error("Fehler beim Speichern der Shop-Daten:", error);
+      console.error("Error saving shop data:", error);
     }
   }, [cart, favorites, isHydrated]);
 
@@ -169,7 +188,7 @@ export function useCart() {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error(
-      "useCart muss innerhalb eines CartProviders verwendet werden",
+      "useCart must be used within a CartProvider",
     );
   }
   return context;

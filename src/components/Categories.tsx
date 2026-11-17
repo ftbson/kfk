@@ -2,39 +2,12 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
-
-const categories = [
-  {
-    id: "ville",
-    name: "CITY E-BIKES",
-    subName: "VILLE",
-    link: "/categorie/ville",
-    image: "/img/city.jpg", // Remplace par tes images
-    buttonText: "Entdecken",
-  },
-  {
-    id: "vtc",
-    name: "TREKKING E-BIKES",
-    subName: "VTC",
-    link: "/categorie/vtc",
-    image: "/img/TREKKING.jpg",
-    buttonText: "Entdecken",
-  },
-  {
-    id: "vtt",
-    name: "E-MOUNTAINBIKES",
-    subName: "VTT",
-    link: "/categorie/vtt",
-    image: "/img/E-MOUNTAINBIKES.jpg",
-    buttonText: "Entdecken",
-  },
-];
+import { siteConfig } from "@/config/site";
 
 export default function CategorySection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Animation Reveal progressive au défilement
+  // Animation progressive au défilement (Intersection Observer)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -47,58 +20,67 @@ export default function CategorySection() {
       { threshold: 0.15 },
     );
 
-    const elements = sectionRef.current?.querySelectorAll(
-      ".KUN FAYA KUN-reveal",
-    );
+    const elements = sectionRef.current?.querySelectorAll(".kfk-reveal");
     elements?.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="KUN FAYA KUN-categories-section" ref={sectionRef}>
-      <div className="KUN FAYA KUN-categories-container">
-        {/* En-tête centré */}
-        <div className="KUN FAYA KUN-categories-header KUN FAYA KUN-reveal">
-          <span className="KUN FAYA KUN-categories-subtitle">
-            UNSERE KATEGORIEN
+    <section className="kfk-categories-section" ref={sectionRef} aria-labelledby="categories-title">
+      <div className="kfk-categories-container">
+        
+        {/* En-tête de section centré */}
+        <div className="kfk-categories-header kfk-reveal">
+          <span className="kfk-categories-subtitle">
+            {siteConfig.brand.name} DÉPARTEMENTS
           </span>
-          <h2 className="KUN FAYA KUN-categories-title">
-            KATEGORIEN FÜR JEDEN FAHRSTIL
+          <h2 id="categories-title" className="kfk-categories-title">
+            CINQ MONDES. UNE DESTINÉE.
           </h2>
         </div>
 
-        {/* Grille des 3 catégories (Style 2ème image) */}
-        <div className="KUN FAYA KUN-categories-grid">
-          {categories.map((cat, index) => (
+        {/* Grille des départements (4 colonnes alignées sur PC) */}
+        <div className="kfk-categories-grid">
+          {siteConfig.departments.map((dept, index) => (
             <div
-              key={cat.id}
-              className={`KUN FAYA KUN-category-card KUN FAYA KUN-reveal delay-${index + 1}`}
+              key={dept.id}
+              className={`kfk-category-card kfk-reveal delay-${index + 1}`}
             >
-              <div className="KUN FAYA KUN-category-image-wrapper">
-                <Image
-                  src={cat.image}
-                  alt={cat.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="KUN FAYA KUN-category-img"
+              {/* Image de fond */}
+              <div className="kfk-category-image-wrapper">
+                <img
+                  src={
+                    dept.id === "djalabiya-house"
+                      ? "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop"
+                      : dept.id === "accessories"
+                      ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop"
+                      : dept.id === "look-and-drip"
+                      ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+                      : dept.id === "signature"
+                      ? "https://images.unsplash.com/photo-1616949755610-8c9bbc08f138?q=80&w=800&auto=format&fit=crop"
+                      : "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop"
+                  }
+                  alt={dept.name}
+                  className="kfk-category-img"
                 />
-                <div className="KUN FAYA KUN-category-overlay"></div>
+                <div className="kfk-category-overlay"></div>
               </div>
 
-              {/* Textes et Bouton centrés sur la carte */}
-              <div className="KUN FAYA KUN-category-content">
-                <span className="KUN FAYA KUN-category-badge">
-                  {cat.subName}
-                </span>
-                <h3 className="KUN FAYA KUN-category-name">{cat.name}</h3>
-                <Link href={cat.link} className="KUN FAYA KUN-category-btn">
-                  {cat.buttonText}
+              {/* Contenu éditorial (Titre + Bouton Pilule) */}
+              <div className="kfk-category-content">
+                <h3 className="kfk-category-name">{dept.name}</h3>
+                <Link
+                  href={dept.id === "packs" ? "/packs" : `/categorie/${dept.id}`}
+                  className="kfk-category-pill-btn"
+                >
+                  Acheter
                 </Link>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
