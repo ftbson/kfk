@@ -4,6 +4,14 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
+interface Hotspot {
+  id: string;
+  label: string;
+  top: string;
+  left: string;
+  link: string;
+}
+
 interface Slide {
   id: number;
   title: string;
@@ -13,10 +21,9 @@ interface Slide {
   imageRight: string;
   ctaText: string;
   ctaLink: string;
-  bgColor: string;
+  hotspots?: Hotspot[];
 }
 
-// Hero slides driven by siteConfig departments (first 4 departments)
 const heroSlides: Slide[] = siteConfig.departments
   .slice(0, 4)
   .map((dept, idx) => ({
@@ -24,7 +31,6 @@ const heroSlides: Slide[] = siteConfig.departments
     title: dept.hero.title,
     subtitle: dept.hero.subtitle,
     category: dept.hero.category,
-    // TODO: Replace with actual KFK assets in /public/img/hero/
     imageLeft:
       dept.id === "JALABIYA-house"
         ? "/img/jalabiya.jpg"
@@ -43,14 +49,9 @@ const heroSlides: Slide[] = siteConfig.departments
             : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop",
     ctaText: dept.hero.ctaText,
     ctaLink: dept.hero.ctaLink,
-    bgColor:
-      idx === 0
-        ? "#0f0f0f"
-        : idx === 1
-          ? "#141414"
-          : idx === 2
-            ? "#0d0d0d"
-            : "#111111",
+    hotspots: [
+      { id: "h1", label: dept.name, top: "42%", left: "58%", link: dept.hero.ctaLink }
+    ]
   }));
 
 export default function Hero() {
@@ -80,12 +81,11 @@ export default function Hero() {
   return (
     <section
       className={`kfk-hero-section ${isLoaded ? "reveal-loaded" : ""}`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       aria-label="Carrousel hero KFK"
     >
       {/* Main Split-Screen Container */}
       <div className="hero-split-container">
+        
         {/* Left Side of Split */}
         <div className="hero-side hero-side-left">
           <div
@@ -106,6 +106,18 @@ export default function Hero() {
           >
             <div className="hero-overlay-gradient"></div>
           </div>
+
+          {/* Hotspots interactifs sur l'image (inspiré de la référence) */}
+          {slide.hotspots?.map((spot) => (
+            <Link
+              key={spot.id}
+              href={spot.link}
+              className="hero-hotspot-badge"
+              style={{ top: spot.top, left: spot.left }}
+            >
+              <span>{spot.label}</span>
+            </Link>
+          ))}
         </div>
 
         {/* Floating Central Content (Titles, Slogan, CTA) */}
@@ -130,25 +142,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Navigation Controls & Indicators (Bottom Right) */}
-        <div className="hero-indicators-bar">
-          <button
-            className="hero-nav-arrow"
-            onClick={() =>
-              setCurrentSlide(
-                (prev) => (prev - 1 + heroSlides.length) % heroSlides.length,
-              )
-            }
-            aria-label="Diapositive précédente"
-          >
-            <i className="fa-solid fa-chevron-left" aria-hidden="true"></i>
-          </button>
-
-          <div
-            className="hero-dots"
-            role="tablist"
-            aria-label="Indicateurs de diapositives"
-          >
+        {/* Indicateurs en bas à droite (Style exact inspiré de la capture) */}
+        <div className="hero-bottom-controls">
+          <div className="hero-dots" role="tablist" aria-label="Indicateurs de diapositives">
             {heroSlides.map((s, idx) => (
               <button
                 key={s.id}
@@ -156,21 +152,21 @@ export default function Hero() {
                 onClick={() => setCurrentSlide(idx)}
                 role="tab"
                 aria-selected={idx === currentSlide}
-                aria-label={`Aller à la diapositive ${idx + 1}: ${s.title}`}
+                aria-label={`Aller à la diapositive ${idx + 1}`}
               ></button>
             ))}
           </div>
 
-          <button
-            className="hero-nav-arrow"
-            onClick={() =>
-              setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-            }
-            aria-label="Diapositive suivante"
+          {/* Bouton Play / Pause interactif */}
+          <button 
+            className="hero-pause-play-btn"
+            onClick={() => setIsPaused(!isPaused)}
+            aria-label={isPaused ? "Reprendre le carrousel" : "Mettre en pause le carrousel"}
           >
-            <i className="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <i className={isPaused ? "fa-solid fa-play" : "fa-solid fa-pause"} aria-hidden="true"></i>
           </button>
         </div>
+
       </div>
     </section>
   );
