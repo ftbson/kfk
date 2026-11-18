@@ -96,7 +96,7 @@ export default function FavoritesPage() {
                       aria-label={`Ajouter ${product.title} au panier`}
                     >
                       <i className="fa-solid fa-bag-shopping" aria-hidden="true"></i>
-                      Ajouter au panier
+                      Ajouter
                     </button>
                   </div>
                 </div>

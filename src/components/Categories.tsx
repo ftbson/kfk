@@ -40,7 +40,7 @@ export default function CategorySection() {
           </span>
           <h2 id="categories-title" className="kfk-categories-title">
             CINQ MONDES. UNE DESTINÉE.
-          </h2>
+          </h2> 
         </div>
 
         {/* Grille des départements (4 colonnes alignées sur PC) */}
@@ -55,7 +55,7 @@ export default function CategorySection() {
                 <img
                   src={
                     dept.id === "JALABIYA-house"
-                      ? "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop"
+                      ? "/img/jalabiya.jpg"
                       : dept.id === "accessories"
                         ? "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop"
                         : dept.id === "look-and-drip"
@@ -66,7 +66,7 @@ export default function CategorySection() {
                   }
                   alt={dept.name}
                   className="kfk-category-img"
-                />
+                /> 
                 <div className="kfk-category-overlay"></div>
               </div>
 

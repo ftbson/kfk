@@ -23,7 +23,7 @@ export default function ProductDetailActions({
     <div className="kfk-detail-actions">
       <button className="kfk-detail-add-btn" onClick={handleAddToCart}>
         <i className="fa-solid fa-cart-shopping" aria-hidden="true" />
-        Ajouter au panier
+        Ajouter
       </button>
       <button
         className="kfk-detail-favorite-btn"
