@@ -730,10 +730,8 @@ button {
   }
 }
 
-
-
 /* ==========================================================================
-   KFK CATEGORIES SECTION (STYLE ÉDITORIAL, COMPACT & SANS BORDER-RADIUS)
+   KFK CATEGORIES SECTION (STYLE ÉDITORIAL, COMPACT, SANS BORDER-RADIUS & SLIDER MOBILE)
    ========================================================================== */
 
 .kfk-categories-section {
@@ -772,7 +770,13 @@ button {
   letter-spacing: -0.5px;
 }
 
-/* Grille 4 colonnes sur la même ligne */
+/* Wrapper du slider mobile */
+.kfk-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Grille 4 colonnes sur PC */
 .kfk-categories-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -780,11 +784,45 @@ button {
   width: 100%;
 }
 
+/* Flèches de navigation (masquées sur PC, visibles sur mobile) */
+.kfk-slider-arrow {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: rgba(10, 10, 10, 0.7);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.kfk-slider-arrow:hover {
+  background-color: var(--color-gold-main);
+  color: #0A0A0A;
+}
+
+.kfk-slider-arrow.left {
+  left: -5px;
+}
+
+.kfk-slider-arrow.right {
+  right: -5px;
+}
+
 /* Carte éditoriale compacte et sans arrondis */
 .kfk-category-card {
   position: relative;
-  height: 350px; /* Hauteur réduite pour un format plus compact */
-  border-radius: 0; /* Suppression totale des bordures arrondies */
+  height: 350px;
+  border-radius: 0;
   overflow: hidden;
   background-color: #0A0A0A;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
@@ -792,6 +830,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  flex-shrink: 0;
 }
 
 .kfk-category-card:hover {
@@ -900,19 +939,36 @@ button {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  /* Sur mobile, passage en ligne horizontale avec défilement tactile (flex) */
   .kfk-categories-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0.8rem;
+    padding-bottom: 0.8rem;
+    scrollbar-width: none; /* Cache la barre de défilement sur Firefox */
   }
+
+  .kfk-categories-grid::-webkit-scrollbar {
+    display: none; /* Cache la barre de défilement sur Chrome/Safari */
+  }
+
   .kfk-category-card {
-    height: 320px;
+    flex: 0 0 72%; /* Diminue la dimension des cartes pour voir la suivante et gagner de l'espace */
+    height: 280px; /* Hauteur réduite sur mobile */
+    scroll-snap-align: start;
   }
+
+  /* Affiche les flèches tactiles sur mobile */
+  .kfk-slider-arrow {
+    display: flex;
+  }
+
   .kfk-categories-section {
     padding: 3rem 1rem;
   }
 }
-
-
 
 
 

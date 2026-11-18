@@ -168,7 +168,7 @@ export const siteConfig = {
       slug: "JALABIYA-house",
       theme: "Tradition & Élégance",
       description:
-        "JALABIYAs, boubous, tenues traditionnelles modernes, tissus premium, collections pour cérémonies et célébrations.",
+        "Jalabiyas, boubous, djellabas, kaftans et ensembles traditionnels masculins. Coton, lin, laine et jacquard premium pour le quotidien et les cérémonies.",
       heroImage:
         "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1920&q=80",
       tagline: "Tradition & Élégance",
@@ -177,7 +177,7 @@ export const siteConfig = {
         subtitle: "Tradition & Élégance. L'art du boubou moderne revisité.",
         category: "01. TRADITION",
         ctaText: "Découvrir la collection",
-        ctaLink: "/JALABIYA-house",
+        ctaLink: "/categorie/JALABIYA-house",
       },
     },
     {
@@ -186,17 +186,17 @@ export const siteConfig = {
       slug: "accessories",
       theme: "Les Détails Qui Font La Différence",
       description:
-        "Montres, lunettes, parfums, bracelets, bijoux, sacs et sacoches.",
+        "Montres, lunettes, parfums, chaînes, bracelets, bijoux, portefeuilles et sacoches. Acier, cuir, pierres naturelles et fragrances signature.",
       heroImage:
         "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=1920&q=80",
       tagline: "Les Détails Qui Font La Différence",
       hero: {
         title: "ACCESSOIRES",
         subtitle:
-          "Les détails qui font la différence. Montres, fragrances, bijoux et plus.",
+          "Les détails qui font la différence. Montres, fragrances, bijoux et maroquinerie.",
         category: "02. DÉTAILS",
         ctaText: "Explorer les accessoires",
-        ctaLink: "/accessories",
+        ctaLink: "/categorie/accessories",
       },
     },
     {
@@ -205,17 +205,17 @@ export const siteConfig = {
       slug: "look-and-drip",
       theme: "Style Quotidien",
       description:
-        "Ensembles, joggers, chemises, pantalons, sneakers, chaussures, polos, looks complets.",
+        "T-shirts, polos, chemises, pantalons, jeans, joggers, vestes, sweats, sneakers et chaussures. Essentiels masculins modernes, coupes soignées, matières durables.",
       heroImage:
         "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&q=80",
       tagline: "Style Quotidien",
       hero: {
         title: "LOOK & DRIP",
         subtitle:
-          "Ensembles, joggers et style urbain maîtrisé. Le drip au quotidien.",
+          "Essentiels quotidiens, coupes maîtrisées. Le style sans effort.",
         category: "03. STREETWEAR",
         ctaText: "Voir les tenues",
-        ctaLink: "/look-and-drip",
+        ctaLink: "/categorie/look-and-drip",
       },
     },
     {
@@ -224,7 +224,7 @@ export const siteConfig = {
       slug: "signature",
       theme: "L'Essence De Votre Style",
       description:
-        "Parfums signature, collections exclusives, coffrets cadeaux, accessoires KFK personnalisés.",
+        "Parfums signature numérotés, coffrets cadeaux luxe, accessoires personnalisés gravés, ceintures réversibles. L'exclusivité KFK.",
       heroImage:
         "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=1920&q=80",
       tagline: "L'Essence De Votre Style",
@@ -233,7 +233,7 @@ export const siteConfig = {
         subtitle: "Parfums exclusifs, éditions limitées et luxe personnalisé.",
         category: "04. LUXE",
         ctaText: "Explorer le luxe",
-        ctaLink: "/signature",
+        ctaLink: "/categorie/signature",
       },
     },
     {
@@ -242,7 +242,7 @@ export const siteConfig = {
       slug: "packs",
       theme: "Looks Complets Sélectionnés",
       description:
-        "Gentleman Pack, Friday Pack, Drip Pack, Executive Pack — ensembles prêts à porter sélectionnés.",
+        "Gentleman Pack, Friday Pack, Drip Pack, Executive Pack — ensembles cohérents d'articles du catalogue. Un clic, un look complet, prix avantageux.",
       heroImage:
         "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=1920&q=80",
       tagline: "Looks Complets Sélectionnés",
@@ -263,36 +263,36 @@ export const siteConfig = {
       id: "gentleman-pack",
       name: "Gentleman Pack",
       tagline: "Élégance & Réussite",
-      items: ["Pantalon", "Chemise", "Montre", "Parfum"],
+      items: ["Pantalon droit noir", "Chemise Oxford blanche", "Montre minimaliste argent", "Parfum Oud 100ml"],
       description:
-        "L'ensemble essentiel pour le gentleman moderne. Tranchant, confiant, complet.",
+        "L'essentiel du gentleman moderne. Pantalon, chemise, montre, parfum — look complet bureau et soirée. Valeur 455$ → 365$.",
       theme: "Élégance & Réussite",
     },
     {
       id: "friday-pack",
       name: "Friday Pack",
-      tagline: "Spiritualité & Prestige",
-      items: ["JALABIYA", "Parfum", "Montre"],
+      tagline: "Tradition & Prestige",
+      items: ["Jalabiya classique noir", "Parfum Oud 100ml", "Montre minimaliste argent"],
       description:
-        "Pour la prière du vendredi et au-delà. La tradition rencontre le luxe.",
-      theme: "Spiritualité & Prestige",
+        "Pour le vendredi et les cérémonies. Jalabiya, parfum, montre — tradition et élégance réunies. Valeur 405$ → 325$.",
+      theme: "Tradition & Prestige",
     },
     {
       id: "drip-pack",
       name: "Drip Pack",
       tagline: "Confort & Style",
-      items: ["Jogger", "Sneakers", "Lunettes", "Bracelet"],
+      items: ["Jogging gris chiné", "Sneakers minimalistes blanc", "Lunettes aviateur doré", "Bracelet perles onyx"],
       description:
-        "Confort street-ready au style indéniable. Drip quotidien sans effort.",
+        "Style urbain quotidien. Jogging, sneakers, lunettes, bracelet — confort et style assurés. Valeur 357$ → 285$.",
       theme: "Confort & Style",
     },
     {
       id: "executive-pack",
       name: "Executive Pack",
       tagline: "Classe & Ambition",
-      items: ["Costume ou Tenue Élégante", "Montre", "Sacoche"],
+      items: ["Pantalon droit noir", "Chemise Oxford blanche", "Veste minimaliste noire", "Montre chronographe noir", "Sacoche bandoulière charbon"],
       description:
-        "Power dressing pour le leader. Commandez chaque pièce où vous entrez.",
+        "Power dressing pour le leader. Pantalon, chemise, veste, montre, sacoche — commandement total. Valeur 645$ → 515$.",
       theme: "Classe & Ambition",
     },
   ],
@@ -312,7 +312,7 @@ export const siteConfig = {
     { name: "KFK Drip Look", department: "look-and-drip", pack: "drip-pack" },
     {
       name: "KFK Executive Look",
-      department: "signature",
+      department: "look-and-drip",
       pack: "executive-pack",
     },
   ],

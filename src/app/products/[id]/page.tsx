@@ -52,7 +52,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
     { label: "Catégorie", value: product.category },
     product.fabric && { label: "Tissu", value: product.fabric },
     product.material && { label: "Matière", value: product.material },
-    product.size && { label: "Tailles disponibles", value: product.size },
+    product.sizes && product.sizes.length > 0 && {
+      label: "Tailles disponibles",
+      value: product.sizes.join(", ")
+    },
+    product.colors && product.colors.length > 0 && {
+      label: "Coloris disponibles",
+      value: product.colors.join(", ")
+    },
     product.scentNotes && { label: "Notes olfactives", value: product.scentNotes },
     product.isLimitedEdition &&
       product.limitedEditionNumber && {

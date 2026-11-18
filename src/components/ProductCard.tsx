@@ -94,7 +94,7 @@ export default function ProductCard({ product, variant = "default" }: ProductCar
             aria-label={`Ajouter ${product.title} au panier`}
           >
             <i className="fa-solid fa-bag-shopping" aria-hidden="true"></i>
-            <span className="btn-text">Ajouter au panier</span>
+            <span className="btn-text">Ajouter</span>
           </button>
         </div>
       </div>
